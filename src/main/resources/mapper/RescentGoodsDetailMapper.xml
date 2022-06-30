@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.RescentGoodsDetailMapper">
+	<select id="selectGoodsDetail"
+		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
+		select sku.*
+		from rescent_saw_goods as rsg
+		join sku
+		on rsg.sku_id=sku.sku_id
+		where rsg.user_id =#{userId};
+	</select>
+
+</mapper>

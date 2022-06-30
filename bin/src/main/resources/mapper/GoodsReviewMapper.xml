@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="ltd.newbee.mall.newbeemall.dao.GoodsReviewMapper">
+	<select id="findGoodsReviewByGoodsId"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
+		SELECT
+		re.review_id,rating,nick_name,review_date,goods_name,
+		title,content,photo1,photo2,photo3,photo4,photo5,
+		count(li.review_id)
+		AS count
+		FROM review AS re
+		JOIN tb_newbee_mall_order_item as item
+		ON
+		re.goods_id=item.goods_id
+		AND re.order_id=item.order_id
+		LEFT JOIN
+		review_like AS li
+		ON re.review_id=li.review_id
+		WHERE
+		item.goods_id=#{goodsId} AND proved=0 AND rating=#{rating}
+		GROUP BY
+		re.review_id
+		ORDER BY rating DESC,count DESC
+		LIMIT #{start},#{number}
+	</select>
+
+	<!--判断是否有未评价的订单 -->
+	<select id="checkGoodsReview"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReview">
+		SELECT item.order_id,item.goods_id,user_id
+		FROM
+		tb_newbee_mall_order_item AS item
+		LEFT JOIN review AS re
+		ON re.order_id
+		= item.order_id
+		AND re.goods_id= item.goods_id
+		JOIN tb_newbee_mall_order
+		AS o
+		ON item.order_id=o.order_id
+		WHERE
+		item.goods_id=#{goodsId}
+		AND
+		re.order_id IS NULL
+		AND user_id=#{userId}
+		ORDER BY o.create_time
+	</select>
+
+	<!--插入数据 -->
+	<insert id="insertGoodsReview">
+		insert into review
+		(review_id,order_id,goods_id,nick_name,
+		rating,title,content,photo1,photo2,photo3,photo4,photo5,review_date)
+		values
+		(#{reviewId},#{orderId}, #{goodsId}, #{nickName}
+		, #{rating},
+		#{title}, #{content}, #{photo1}
+		, #{photo2}, #{photo3},
+		#{photo4},#{photo5},#{reviewDate})
+	</insert>
+
+	<!--取review_id最大值，採番用 -->
+	<select id="findMaxReviewId" resultType="long">
+		SELECT max(review_id)
+		FROM review
+	</select>
+
+	<!--取rating平均数，总评价件数，和写评价内容的总件数 -->
+	<select id="countReviewsAndAverageRating"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg">
+		SELECT AVG(rating) AS rating_avg,COUNT(*) AS review_count,
+		COUNT(title) AS title_count
+		FROM review
+		WHERE proved=0 AND
+		goods_id=#{goodsId}
+	</select>
+
+	<!--取各个rating的数量 -->
+	<select id="countReviewsByRating"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg">
+		SELECT rating,COUNT(rating) AS rating_count
+		FROM review
+		WHERE proved=0 AND goods_id=#{goodsId}
+		Group BY rating
+		Order BY rating
+		DESC
+	</select>
+
+	<!--取各个rating的数量,方法2 -->
+	<select id="countReviewsByRating2"
+		resultType="ltd.newbee.mall.newbeemall.entity.GoodsReviewCountAndAvg">
+		SElECT 5 AS rating,COUNT(review_id)  AS ratingCount from review WHERE rating=5 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 4,COUNT(review_id) from review WHERE rating=4 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 3,COUNT(review_id) from review WHERE rating=3 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 2,COUNT(review_id) from review WHERE rating=2 AND goods_id=#{goodsId}
+		UNION ALL
+		SElECT 1,COUNT(review_id) from review WHERE rating=1 AND goods_id=#{goodsId};
+	</select>
+
+
+	<!--插入数据 方法2 -->
+	<insert id="insertGoodsReview2">
+		insert into review
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="reviewId != null">
+				review_id,
+			</if>
+			<if test="orderId != null">
+				order_id,
+			</if>
+			<if test="goodsId != null">
+				goods_id,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="rating != null">
+				rating,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="photo1 != null">
+				photo1,
+			</if>
+			<if test="photo2 != null">
+				photo2,
+			</if>
+			<if test="photo3 != null">
+				photo3,
+			</if>
+			<if test="photo4 != null">
+				photo4,
+			</if>
+			<if test="photo5 != null">
+				photo5,
+			</if>
+			<if test="reviewDate != null">
+				review_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="reviewId != null">
+				#{reviewId},
+			</if>
+			<if test="orderId != null">
+				#{orderId},
+			</if>
+			<if test="goodsId != null">
+				#{goodsId},
+			</if>
+			<if test="nickName != null">
+				#{nickName},
+			</if>
+			<if test="rating != null">
+				#{rating},
+			</if>
+			<if test="title != null">
+				#{title},
+			</if>
+			<if test="content != null">
+				#{content},
+			</if>
+			<if test="photo1 != null">
+				#{photo1},
+			</if>
+			<if test="photo2 != null">
+				#{photo2},
+			</if>
+			<if test="photo3 != null">
+				#{photo3},
+			</if>
+			<if test="photo4 != null">
+				#{photo4},
+			</if>
+			<if test="photo5 != null">
+				#{photo5},
+			</if>
+			<if test="reviewDate != null">
+				#{reviewDate},
+			</if>
+		</trim>
+	</insert>
+
+	<!--判断是否可以插入review_like -->
+	<select id="checkReviewLike" resultType="int">
+		SELECT COUNT(*) FROM
+		review_like
+		WHERE review_id=#{reviewId} AND user_id=#{userId};
+	</select>
+
+	<!--review_like插入数据 -->
+	<insert id="insertReviewLike">
+		INSERT INTO review_like
+		(review_id,user_id,like_date)
+		VALUES
+		(#{reviewId},#{userId},#{likeDate})
+	</insert>
+
+</mapper>

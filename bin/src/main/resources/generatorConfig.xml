@@ -4,7 +4,7 @@
 	<context id="context1">
 		<jdbcConnection
 			connectionURL="jdbc:mysql://localhost:3306/newbee_mall_db?useUnicode=true"
-			driverClass="com.mysql.cj.jdbc.Driver" password="Kissme721520"
+			driverClass="com.mysql.cj.jdbc.Driver" password="0852"
 			userId="root" />
 		<javaModelGenerator
 			targetPackage="ltd.newbee.mall.newbeemall.entity"
@@ -13,7 +13,7 @@
       	<property name="trimStrings" value="true" />
     	</javaModelGenerator>
     	
-		<table schema="newbee_mall_db" tableName="rescent_saw_goods">
+		<table schema="newbee_mall_db" tableName="review">
 			<property name="useActualColumnNames" value="false" />
 		</table>
 	</context>
