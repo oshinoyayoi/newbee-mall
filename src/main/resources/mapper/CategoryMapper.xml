@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.newbeemall.dao.CategoryMapper">
+	<select id="selectGoodsDetail"
+		resultType="ltd.newbee.mall.newbeemall.entity.Category">
+		select c.*,ci.img
+		from category as c
+		left join category_img as ci
+		on ci.category_id=c.category_id
+		where c.active="0" ;
+	</select>
+
+</mapper>
