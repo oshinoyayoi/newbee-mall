@@ -4,6 +4,6 @@ import java.util.List;
 
 import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo;
 
-public interface RescentGoodsDetailMapper {
-	List<TbNewbeeMallGoodsInfo> selectGoodsDetail(int userId);
+public interface SkuCategoryMapper {
+	List<TbNewbeeMallGoodsInfo> findGoodsInfoByGoodsCategoryId(Long categoryId,String orderBy);
 }

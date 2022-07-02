@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.Generated;
 
-public class Category implements Serializable{
+public class Category implements Serializable {
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:36.2464111+09:00", comments = "Source field: category.category_id")
 	private Integer categoryId;
@@ -14,6 +14,8 @@ public class Category implements Serializable{
 	private Integer parent;
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:36.2464111+09:00", comments = "Source field: category.active")
 	private String active;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T15:22:35.4728557+09:00", comments = "Source field: category_img.img")
+	private String img;
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:36.2464111+09:00", comments = "Source field: category.category_id")
 	public Integer getCategoryId() {
@@ -53,5 +55,15 @@ public class Category implements Serializable{
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:36.2474104+09:00", comments = "Source field: category.active")
 	public void setActive(String active) {
 		this.active = active == null ? null : active.trim();
+	}
+
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T15:22:35.4728557+09:00", comments = "Source field: category_img.img")
+	public String getImg() {
+		return img;
+	}
+
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T15:22:35.4728557+09:00", comments = "Source field: category_img.img")
+	public void setImg(String img) {
+		this.img = img == null ? null : img.trim();
 	}
 }

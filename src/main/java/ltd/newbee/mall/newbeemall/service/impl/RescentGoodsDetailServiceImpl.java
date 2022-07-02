@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ltd.newbee.mall.newbeemall.dao.RescentGoodsDetailMapper;
 import ltd.newbee.mall.newbeemall.entity.Sku;
+import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo;
 import ltd.newbee.mall.newbeemall.service.RescentGoodsDetailService;
 
 @Service
@@ -17,8 +18,8 @@ public class RescentGoodsDetailServiceImpl implements RescentGoodsDetailService 
 	RescentGoodsDetailMapper rescentGoodsDetailMapper;
 
 	@Override
-	public List<Sku> findGoodsDetailsByGoodsId(int userId) {
-		List<Sku> list = rescentGoodsDetailMapper.selectGoodsDetail(userId);
+	public List<TbNewbeeMallGoodsInfo> findGoodsDetailsByGoodsId(int userId) {
+		List<TbNewbeeMallGoodsInfo> list = rescentGoodsDetailMapper.selectGoodsDetail(userId);
 		return list;
 	}
 

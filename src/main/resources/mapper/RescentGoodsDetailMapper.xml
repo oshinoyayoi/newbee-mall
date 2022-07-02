@@ -3,7 +3,7 @@
 <mapper
 	namespace="ltd.newbee.mall.newbeemall.dao.RescentGoodsDetailMapper">
 	<select id="selectGoodsDetail"
-		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
+		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
 		select sku.*
 		from rescent_saw_goods as rsg
 		join sku
