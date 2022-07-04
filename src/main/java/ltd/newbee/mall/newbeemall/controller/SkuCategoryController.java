@@ -4,18 +4,15 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo;
-import ltd.newbee.mall.newbeemall.service.NewBeeMallCarouselService;
+import ltd.newbee.mall.newbeemall.dao.CountSkuCategoryMapper;
 import ltd.newbee.mall.newbeemall.service.SkuCategoryService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
+import ltd.newbee.mall.newbeemall.vo.CountSkuCategoryVo;
 
 @Controller
 public class SkuCategoryController {
@@ -28,21 +25,31 @@ public class SkuCategoryController {
 	 */
 	@Resource
 	private SkuCategoryService skuCategoryService;
-
-    @RequestMapping(value = "/category/{goodsCategoryId}", method = RequestMethod.GET)
-    @ResponseBody
-    public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId,String orderBy,String ascOrDesc) throws Exception {
-		return ResultGenerator
-				.genSuccessResult(skuCategoryService.getSkuCategory(categoryId,orderBy,ascOrDesc));
-    	
-    }
-}
-	//@PostMapping("category")
-	//@ResponseBody
-	//public Result queryProduct(@RequestBody TbNewbeeMallGoodsInfo info) throws Exception {
-
-		// ...业务处理
-
-		//return ResultGenerator
-		//		.genSuccessResult(skuCategoryService.getSkuCategory(info.getGoodsCategoryId(), info.getOrderBy()));
+	@Resource
+	private CountSkuCategoryMapper countSkuCategoryMapper;
 	
+	@RequestMapping(value = "/category/{goodsCategoryId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId, Integer page, String orderBy,
+			String ascOrDesc)  {
+
+		Integer pageNum = (page - 1) * 20;
+		
+		CountSkuCategoryVo countSkuCategoryVo = new CountSkuCategoryVo();
+		countSkuCategoryVo.setCategoryVos(skuCategoryService.getSkuCategory(categoryId, pageNum, orderBy, ascOrDesc));
+		countSkuCategoryVo.setnumberOfCategoryId(countSkuCategoryMapper.countnumberOfCategoryId(categoryId));
+		return ResultGenerator
+				.genSuccessResult(countSkuCategoryVo);
+
+	}
+}
+// @PostMapping("category")
+// @ResponseBody
+// public Result queryProduct(@RequestBody TbNewbeeMallGoodsInfo info) throws
+// Exception {
+
+// ...业务处理
+
+// return ResultGenerator
+// .genSuccessResult(skuCategoryService.getSkuCategory(info.getGoodsCategoryId(),
+// info.getOrderBy()));

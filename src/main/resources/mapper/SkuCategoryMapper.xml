@@ -18,15 +18,14 @@
 		i.goods_category_id=c.category_id
 		
 		where i.goods_category_id=#{categoryId}
-						
-
+		      
 				<if test="ascOrDesc == 'desc'">
 					ORDER BY ${orderBy} DESC
 				</if>
 				<if test="ascOrDesc == 'asc'">
 					ORDER BY ${orderBy} ASC
 				</if>
-
+                limit #{pageNum},20;
 			
 	</select>
 
