@@ -6,5 +6,5 @@ import ltd.newbee.mall.newbeemall.vo.NewBeeMallGoodsDetailVO;
 import ltd.newbee.mall.newbeemall.vo.SkuCategoryVo;
 
 public interface SkuCategoryService {
-	List<SkuCategoryVo> getSkuCategory(Long categoryId,String orderBy) throws Exception;
+	List<SkuCategoryVo> getSkuCategory(Long categoryId,String orderBy,String ascOrDesc) throws Exception;
 }

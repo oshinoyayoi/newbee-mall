@@ -19,32 +19,30 @@ import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
 @Controller
 public class SkuCategoryController {
-	
-	//方法2  Postman:POST
+
+	// 方法2 Postman:POST
 	/**
-	 * restful风格的参数请求
-	 * http://localhost:8080/goods/detail/review/222222
+	 * restful风格的参数请求 http://localhost:8080/goods/detail/review/222222
+	 * 
 	 * @param id
 	 */
 	@Resource
 	private SkuCategoryService skuCategoryService;
 
-//	
-//	@RequestMapping(value = "/category/{goodsCategoryId}", method = RequestMethod.GET)
-//	@ResponseBody
-//	public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId,@RequestParam String orderBy) {
-	@PostMapping("category")
-	@ResponseBody
-	public Result queryProduct(@RequestBody TbNewbeeMallGoodsInfo info) throws Exception {
-		
-	// ...业务处理
-
-	          
-	return ResultGenerator.genSuccessResult(skuCategoryService.getSkuCategory(info.getGoodsCategoryId(),info.getOrderBy()));
-	}
+    @RequestMapping(value = "/category/{goodsCategoryId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId,String orderBy,String ascOrDesc) throws Exception {
+		return ResultGenerator
+				.genSuccessResult(skuCategoryService.getSkuCategory(categoryId,orderBy,ascOrDesc));
+    	
+    }
 }
-	
-	
-	
-	
+	//@PostMapping("category")
+	//@ResponseBody
+	//public Result queryProduct(@RequestBody TbNewbeeMallGoodsInfo info) throws Exception {
 
+		// ...业务处理
+
+		//return ResultGenerator
+		//		.genSuccessResult(skuCategoryService.getSkuCategory(info.getGoodsCategoryId(), info.getOrderBy()));
+	

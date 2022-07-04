@@ -4,23 +4,30 @@
 	namespace="ltd.newbee.mall.newbeemall.dao.SkuCategoryMapper">
 	<select id="findGoodsInfoByGoodsCategoryId"
 		resultType="ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo">
-		select 
-			i.goods_name,
-			i.goods_intro,
-			i.goods_cover_img,
-			i.goods_carousel,
-			i.goods_detail_content,
-			i.original_price,
-			i.selling_price,
-			c.category_name
+		select
+		i.goods_name,
+		i.goods_intro,
+		i.goods_cover_img,
+		i.goods_carousel,
+		i.goods_detail_content,
+		i.original_price,
+		i.selling_price,
+		c.category_name
 		from tb_newbee_mall_goods_info as i
-			join tb_newbee_mall_goods_category as c on i.goods_category_id=c.category_id
-		<where>
-			i.goods_category_id=#{categoryId}
-			<if test="orderBy != null and orderBy != ''">
-				ORDER BY #{orderBy} 
-			</if>
-		</where>
+		join tb_newbee_mall_goods_category as c on
+		i.goods_category_id=c.category_id
+		
+		where i.goods_category_id=#{categoryId}
+						
+
+				<if test="ascOrDesc == 'desc'">
+					ORDER BY ${orderBy} DESC
+				</if>
+				<if test="ascOrDesc == 'asc'">
+					ORDER BY ${orderBy} ASC
+				</if>
+
+			
 	</select>
 
 </mapper>

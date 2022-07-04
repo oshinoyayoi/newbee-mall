@@ -5,5 +5,5 @@ import java.util.List;
 import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo;
 
 public interface SkuCategoryMapper {
-	List<TbNewbeeMallGoodsInfo> findGoodsInfoByGoodsCategoryId(Long categoryId,String orderBy);
+	List<TbNewbeeMallGoodsInfo> findGoodsInfoByGoodsCategoryId(Long categoryId,String orderBy,String ascOrDesc);
 }

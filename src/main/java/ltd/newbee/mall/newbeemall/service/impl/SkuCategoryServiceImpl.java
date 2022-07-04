@@ -25,19 +25,11 @@ public class SkuCategoryServiceImpl implements SkuCategoryService {
 	SkuCategoryMapper skuCategoryMapper;
 
 	@Override
-	public List<SkuCategoryVo> getSkuCategory(Long category,String orderBy) throws Exception {
+	public List<SkuCategoryVo> getSkuCategory(Long category,String orderBy,String ascOrDesc)  {
 		List<SkuCategoryVo> voList = new ArrayList<>();
-		//验证排序字段是否存在，如果存在则驼峰转下划线
-		if (StringUtils.isNotBlank(orderBy)) {
-			Field field = TbNewbeeMallGoodsInfo.class.getDeclaredField(orderBy);
-			if (field == null) {
-				throw new Exception();
-			}else {
-				orderBy = toUnderCase(orderBy);
-			}
-		}
 		
-		List<TbNewbeeMallGoodsInfo> entityList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(category,orderBy);
+		
+		List<TbNewbeeMallGoodsInfo> entityList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(category,orderBy,ascOrDesc);
 		
 		for(TbNewbeeMallGoodsInfo e : entityList) {
 			SkuCategoryVo vo = new SkuCategoryVo();
@@ -55,7 +47,7 @@ public class SkuCategoryServiceImpl implements SkuCategoryService {
 		return voList;
 	}
 
-	public static String toUnderCase(String name) {
+	/*public static String toUnderCase(String name) {
 		final char UNDER_LINE = '_';
 	    if (name == null) {
 	        return null;
@@ -78,4 +70,5 @@ public class SkuCategoryServiceImpl implements SkuCategoryService {
 	    }
 	    return res.toString();
 	}
+	*/
 }
