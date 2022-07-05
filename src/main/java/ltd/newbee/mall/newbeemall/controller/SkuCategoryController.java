@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ltd.newbee.mall.newbeemall.dao.CountSkuCategoryMapper;
+import ltd.newbee.mall.newbeemall.dao.ECGoodsCategoryMapper;
 import ltd.newbee.mall.newbeemall.service.SkuCategoryService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
@@ -27,19 +28,16 @@ public class SkuCategoryController {
 	private SkuCategoryService skuCategoryService;
 	@Resource
 	private CountSkuCategoryMapper countSkuCategoryMapper;
-	
+    
 	@RequestMapping(value = "/category/{goodsCategoryId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId, Integer page, String orderBy,
-			String ascOrDesc)  {
+			String ascOrDesc) {
 
 		Integer pageNum = (page - 1) * 20;
+
 		
-		CountSkuCategoryVo countSkuCategoryVo = new CountSkuCategoryVo();
-		countSkuCategoryVo.setCategoryVos(skuCategoryService.getSkuCategory(categoryId, pageNum, orderBy, ascOrDesc));
-		countSkuCategoryVo.setnumberOfCategoryId(countSkuCategoryMapper.countnumberOfCategoryId(categoryId));
-		return ResultGenerator
-				.genSuccessResult(countSkuCategoryVo);
+		return ResultGenerator.genSuccessResult(skuCategoryService.getSkuCategory(categoryId, pageNum, orderBy, ascOrDesc));
 
 	}
 }

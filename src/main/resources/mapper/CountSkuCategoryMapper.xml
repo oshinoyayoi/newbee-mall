@@ -8,9 +8,10 @@
 	<select id="countnumberOfCategoryId"
 		resultType="java.lang.Integer">
 		<!--id是mapper的方法名，resultType是指定的返回类型-->
-		select
 		count(goods_id)
-		from tb_newbee_mall_goods_info
+		from tb_newbee_mall_goods_info as i
+        join tb_newbee_mall_goods_category as c on
+		i.goods_category_id=c.category_id
 		where goods_category_id=#{categoryId}
 
 
