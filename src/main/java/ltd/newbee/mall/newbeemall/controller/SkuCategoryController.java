@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ltd.newbee.mall.newbeemall.dao.CountSkuCategoryMapper;
-import ltd.newbee.mall.newbeemall.dao.ECGoodsCategoryMapper;
 import ltd.newbee.mall.newbeemall.service.SkuCategoryService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
-import ltd.newbee.mall.newbeemall.vo.CountSkuCategoryVo;
 
 @Controller
 public class SkuCategoryController {

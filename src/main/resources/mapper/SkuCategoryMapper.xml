@@ -4,16 +4,28 @@
 	namespace="ltd.newbee.mall.newbeemall.dao.SkuCategoryMapper">
 	<select id="findGoodsInfoByGoodsCategoryId"
 		resultType="ltd.newbee.mall.newbeemall.vo.SkuCategoryVo">
-		select i.*,c.category_id
-		from tb_newbee_mall_goods_info as i
-		join tb_newbee_mall_goods_category as c
+		select
+		i.goods_name,i.goods_intro,i.goods_cover_img,i.goods_carousel,i.goods_detail_content,
+		i.original_price,i.selling_price,s.col_name,s.col,
+		c.category_id
+		from
+		tb_newbee_mall_goods_info as i
+		join tb_newbee_mall_goods_category
+		as c
 		on i.goods_category_id=c.category_id
-		where c.category_id in
-		(select c2.category_id
-		from tb_newbee_mall_goods_category as c
-		join tb_newbee_mall_goods_category as c2
+		join sub_category as s
+		on s.goods_id=i.goods_id
+		where c.category_id=#{categoryId} or c.category_id in
+		(select
+		c2.category_id
+		from
+		tb_newbee_mall_goods_category as c
+		join
+		tb_newbee_mall_goods_category as
+		c2
 		on c.category_id=c2.parent_id
-		where c.category_id=#{categoryId}
+		where
+		c.category_id=#{categoryId}
 		)
 
 		<if test="ascOrDesc == 'desc'">
