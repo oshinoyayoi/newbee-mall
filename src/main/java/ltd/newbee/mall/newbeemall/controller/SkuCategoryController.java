@@ -29,20 +29,17 @@ public class SkuCategoryController {
     
 	@RequestMapping(value = "/category/{goodsCategoryId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId, Integer page, String orderBy,
+	public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId,String colOne,String colTwo,String colThree, Integer page, String orderBy,
 			String ascOrDesc) {
 
 		Integer pageNum = (page - 1) * 20;
 
 		
-		return ResultGenerator.genSuccessResult(skuCategoryService.getSkuCategory(categoryId, pageNum, orderBy, ascOrDesc));
+		return ResultGenerator.genSuccessResult(skuCategoryService.getSkuCategory(categoryId,colOne,colTwo,colThree, pageNum, orderBy, ascOrDesc));
 
 	}
 }
-// @PostMapping("category")
-// @ResponseBody
-// public Result queryProduct(@RequestBody TbNewbeeMallGoodsInfo info) throws
-// Exception {
+
 
 // ...业务处理
 

@@ -1,5 +1,6 @@
 package ltd.newbee.mall.newbeemall.vo;
 
+import java.util.List;
 import java.util.Map;
 
 public class SubCategoryVo {
@@ -24,4 +25,6 @@ public class SubCategoryVo {
 	public void setCols(Map<String, Integer> cols) {
 		this.cols = cols;
 	}
+
+	
 }

@@ -14,8 +14,10 @@
 		as c
 		on i.goods_category_id=c.category_id
 		join sub_category as s
-		on s.goods_id=i.goods_id
-		where c.category_id=#{categoryId} or c.category_id in
+		on
+		s.goods_id=i.goods_id
+		where c.category_id=#{categoryId} or
+		c.category_id in
 		(select
 		c2.category_id
 		from
@@ -27,7 +29,16 @@
 		where
 		c.category_id=#{categoryId}
 		)
-
+		
+		<if test="colOne!=null">
+			and s.col=#{colOne}
+		</if>
+		<if test="colTwo!=null">
+			and s.col=#{colTwo}
+		</if>
+		<if test="colThree!=null">
+			and s.col=#{colThree}
+		</if>
 		<if test="ascOrDesc == 'desc'">
 			ORDER BY ${orderBy} DESC
 		</if>

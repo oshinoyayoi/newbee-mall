@@ -7,7 +7,7 @@ import ltd.newbee.mall.newbeemall.vo.SecondCategoryVo;
 import ltd.newbee.mall.newbeemall.vo.SkuCategoryVo;
 
 public interface SkuCategoryService {
-	SecondCategoryVo getSkuCategory(Long categoryId, Integer pageNum, String orderBy, String ascOrDesc)
+	SecondCategoryVo getSkuCategory(Long categoryId,String colOne,String colTwo, String colThree, Integer pageNum, String orderBy, String ascOrDesc)
 			;
 	
 }

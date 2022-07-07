@@ -49,17 +49,15 @@ public class TbNewbeeMallGoodsInfo {
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T10:28:39.9930418+09:00", comments = "Source field: tb_newbee_mall_goods_info.update_time")
 	private Date updateTime;
 
-
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T10:28:39.998029+09:00", comments = "Source field: tb_newbee_mall_goods_info.goods_detail_content")
 	private String goodsDetailContent;
 
-	@Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-06T17:09:42.2566542+09:00", comments="Source field: sub_category.col")
-    private String col;
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T17:09:42.2566542+09:00", comments = "Source field: sub_category.col")
+	private String col;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-06T17:09:42.2566542+09:00", comments="Source field: sub_category.col_name")
-    private String colName;
-	
-	
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T17:09:42.2566542+09:00", comments = "Source field: sub_category.col_name")
+	private String colName;
+
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T10:28:39.9920719+09:00", comments = "Source field: tb_newbee_mall_goods_info.goods_id")
 	public Long getGoodsId() {
 		return goodsId;
@@ -210,8 +208,6 @@ public class TbNewbeeMallGoodsInfo {
 		this.updateTime = updateTime;
 	}
 
-	
-
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T10:28:39.998029+09:00", comments = "Source field: tb_newbee_mall_goods_info.goods_detail_content")
 	public String getGoodsDetailContent() {
 		return goodsDetailContent;
@@ -221,31 +217,35 @@ public class TbNewbeeMallGoodsInfo {
 	public void setGoodsDetailContent(String goodsDetailContent) {
 		this.goodsDetailContent = goodsDetailContent == null ? null : goodsDetailContent.trim();
 	}
-    
-	 @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-06T17:09:42.2566542+09:00", comments="Source field: sub_category.col")
-	    public String getCol() {
-	        return col;
-	    }
 
-	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-06T17:09:42.2566542+09:00", comments="Source field: sub_category.col")
-	    public void setCol(String col) {
-	        this.col = col == null ? null : col.trim();
-	    }
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T17:09:42.2566542+09:00", comments = "Source field: sub_category.col")
+	public String getCol() {
+		return col;
+	}
 
-	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-06T17:09:42.2566542+09:00", comments="Source field: sub_category.col_name")
-	    public String getColName() {
-	        return colName;
-	    }
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T17:09:42.2566542+09:00", comments = "Source field: sub_category.col")
+	public void setCol(String col) {
+		this.col = col == null ? null : col.trim();
+	}
 
-	    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-06T17:09:42.2566542+09:00", comments="Source field: sub_category.col_name")
-	    public void setColName(String colName) {
-	        this.colName = colName == null ? null : colName.trim();
-	    }
-	
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T17:09:42.2566542+09:00", comments = "Source field: sub_category.col_name")
+	public String getColName() {
+		return colName;
+	}
+
+	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-06T17:09:42.2566542+09:00", comments = "Source field: sub_category.col_name")
+	public void setColName(String colName) {
+		this.colName = colName == null ? null : colName.trim();
+	}
+
 	private String orderBy;
 
 	private Long parentId;
-	
+
+	private String colOne;
+
+	private String colTwo;
+
 	public String getOrderBy() {
 		return this.orderBy;
 	}
@@ -253,12 +253,28 @@ public class TbNewbeeMallGoodsInfo {
 	public void setOrderBy(String orderBy) {
 		this.orderBy = orderBy;
 	}
-	
+
 	public Long getparentId() {
 		return this.parentId;
 	}
 
 	public void setparentId(Long parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getColOne() {
+		return colOne;
+	}
+
+	public void setColOne(String colOne) {
+		this.colOne = colOne;
+	}
+
+	public String getColTwo() {
+		return colTwo;
+	}
+
+	public void setColTwo(String colTwo) {
+		this.colTwo = colTwo;
 	}
 }
