@@ -1,14 +1,20 @@
 package ltd.newbee.mall.newbeemall.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 import javax.annotation.Resource;
 
+import org.springframework.core.type.filter.AbstractClassTestingTypeFilter;
 import org.springframework.stereotype.Service;
 
+import ltd.newbee.mall.newbeemall.PageUnil;
 import ltd.newbee.mall.newbeemall.dao.CountSkuCategoryMapper;
 import ltd.newbee.mall.newbeemall.dao.CountSubCategoryMapper;
 import ltd.newbee.mall.newbeemall.dao.ECGoodsCategoryMapper;
@@ -39,8 +45,20 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 	CountSubCategoryMapper countSubCategoryMapper;
 
 	@Override
-	public SecondCategoryVo getSkuCategory(Long categoryId, String colOne, String colTwo, String colThree,
-			Integer pageNum, String orderBy, String ascOrDesc) {
+	public SecondCategoryVo getSkuCategory(HashMap<String, Object> map2) {
+		Long categoryId=((Integer) map2.get("categoryId")).longValue();
+		map2.remove("categoryId");
+		int pageNum=(int) map2.get("pageNum");
+		map2.remove("pageNum");
+		String orderBy=(String)map2.get("orderBy");
+		map2.remove("orderBy");
+		String ascOrDesc=(String)map2.get("ascOrDesc");
+		map2.remove("ascOrDesc");
+		List<String> cols=new ArrayList<>();
+		for (String string : map2.keySet()) {
+			cols.add((String)map2.get(string));
+		}
+		
 		List<SkuCategoryVo> voList = new ArrayList<>();
 		List<Long> parentIds = new ArrayList<>();
 		List<GoodsCategory> subList = ecGoodsCategoryMapper.selectGoodsCategory();
@@ -57,8 +75,8 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 			// 名字+商品件数
 			countAndParentId = secondSkuCategoryMapper.findSubCategory(categoryId);
 
-			voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, colOne, colTwo, pageNum, orderBy,
-					ascOrDesc);
+			voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId,pageNum,
+					orderBy, ascOrDesc);
 
 			int x = 0;
 
@@ -73,23 +91,25 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 
 		} else {
 
-			List<SkuCategoryVo> entityList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, colOne,
-					colTwo, pageNum, orderBy, ascOrDesc);
+			List<SkuCategoryVo> entityList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, 
+					 pageNum, orderBy, ascOrDesc);
 
 			secondVo.setVoList(entityList);
 			secondVo.setCountCategoryNumsInteger(entityList.size());
 
 		}
-		secondVo.setColNameAndCountCol(getColNameAndCountCol(categoryId, colOne, colTwo, pageNum, orderBy, ascOrDesc));
+		secondVo.setColNameAndCountCol(
+				getColNameAndCountCol(categoryId, pageNum, orderBy, ascOrDesc));
+		
 		return secondVo;
 
 	}
 
-	public List<SubCategoryVo> getColNameAndCountCol(Long categoryId, String colOne, String colTwo, Integer pageNum,
-			String orderBy, String ascOrDesc) {
+	public List<SubCategoryVo> getColNameAndCountCol(Long categoryId, 
+			Integer pageNum, String orderBy, String ascOrDesc) {
 		List<SkuCategoryVo> voList = new ArrayList<>();
-		voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, colOne, colTwo, pageNum, orderBy,
-				ascOrDesc);
+		voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, pageNum,
+				orderBy, ascOrDesc);
 		// 将相同的colname抽出
 		HashSet<String> colNames = new HashSet<>();
 		List<SubCategoryVo> colNamesAndCols = new ArrayList<>();
@@ -127,36 +147,91 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 		return colNamesAndCols; // for循环完成后返回所有数据
 
 	}
+}
 
 	//
-	public List<SubCategoryVo> getColAsEnter(Long categoryId, String colOne, String colTwo, Integer pageNum,
-			String orderBy, String ascOrDesc) {
+	/*public List<SkuCategoryVo> getColAsEnter(Long categoryId, 
+			Integer pageNum, String orderBy, String ascOrDesc) {
 		List<SkuCategoryVo> voList = new ArrayList<>();
-		voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, colOne, colTwo, pageNum, orderBy,
-				ascOrDesc);
+		voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId,  pageNum,
+				orderBy, ascOrDesc);
 		// 找出不含colname的商品并删除
 		List<Long> GoodsId = new ArrayList<>();
+
 		for (int i = 0; i < voList.size(); i++) {
+
+			// 少一个得到goodsid GoodsId.get(i)
+
 			if (!voList.contains(GoodsId)) {
 				voList.remove(i);
+				i--;
 			}
 		}
-		HashSet<String>colnameList=new HashSet<>();
+		HashSet<String> colnameList = new HashSet<>();
 		for (int i = 0; i < voList.size(); i++) {
 			colnameList.add(voList.get(i).getColName());
 		}
+
+		// 当col1!=null的时候，找不含有col1的商品并去掉
+		List<SkuCategoryVo> voList1 = voList;
 		for (int i = 0; i < voList.size(); i++) {
-			if (colOne==) {
-				
+			if (!(colOne == null)) {
+				if (voList.contains(colOne)) {
+					continue;
+				} else {
+					voList.remove(i);
+					voList1 = voList;
+				}
 			}
 		}
+		// 当col2!=null的时候，找不含有col2的商品并去掉
+		List<SkuCategoryVo> voList2 = voList;
+		for (int i = 0; i < voList.size(); i++) {
+			if (!(colTwo == null)) {
+				if (voList.contains(colTwo)) {
+					continue;
+				} else {
+					voList.remove(i);
+					voList2 = voList;
+				}
+			}
+		}
+		// 当col3!=null的时候，找不含有co31的商品并去掉
+		List<SkuCategoryVo> voList3 = voList;
+		for (int i = 0; i < voList.size(); i++) {
+			if (!(colOne == null)) {
+				if (voList.contains(colThree)) {
+					continue;
+				} else {
+					voList.remove(i);
+					voList3 = voList;
+				}
+			}
+		}
+		// 当col1的colname=col2的colname时，合并
+		for (int i = 0; i < voList.size(); i++) {
+			if (voList1.get(i).getColName().equals(voList2.get(i).getColName())) {
+				voList1.addAll(voList2);
+			}
+		}
+		// 当col2的colname!=col3的colname时，交集
+			List<SkuCategoryVo>resultList=new ArrayList<>();
+			for (int i = 0; i < voList.size(); i++) {
+				if (!voList2.get(i).getColName().equals(voList3.get(i).getColName())) {
+					 resultList.addAll(voList2);
+					 resultList.addAll(voList3); 
+					 resultList = new ArrayList<>(new LinkedHashSet<>(resultList));
+				}
+				
+			}
+					
+				
+		
+		return resultList;
 
-		// colname相同的时候，取出对应的col
-		/*
-		 * if (voList.get(i).getColName()== voList.get(i+1).getColName()) { String col1
-		 * = voList.get(i).getCol(); String col2 = voList.get(i+1).getCol();
-		 */
-		return null;
+		
+
+		
 	}
 
 }

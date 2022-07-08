@@ -10,15 +10,15 @@
 		<!--id是mapper的方法名，resultType是指定的返回类型 -->
 		select count(goods_id)
 		from sub_category
-		where col_name="機能"
-		union all
-		(select count(goods_id)
-		from sub_category
-		where col="無段階リクライ")
-		union all
-		(select count(goods_id)
-		from sub_category
-		where col=#{col})
+		<where>
+			goods_id in
+			<foreach item="goodsId" collection="goodsIdList" separator=" , "
+				open="(" close=")">
+				#{goodsId}
+			</foreach>
+			and col=#{col}
+		</where>
+
 
 
 
@@ -26,3 +26,4 @@
 
 </mapper>
 
+<!--计数用-->

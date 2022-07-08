@@ -15,6 +15,7 @@ public class SecondCategoryVo {
 
 	private List<SubCategoryVo> colNameAndCountCol;
 
+	private List<SubCategoryVo> resultList;
 	
 
 	public List<SubECGoodsCategoryVo> getCountAndParentId() {
@@ -56,6 +57,16 @@ public class SecondCategoryVo {
 	public void setColNameAndCountCol(List<SubCategoryVo> colNameAndCountCol) {
 		this.colNameAndCountCol = colNameAndCountCol;
 	}
+
+	public List<SubCategoryVo> getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List<SubCategoryVo> resultList) {
+		this.resultList = resultList;
+	}
+
+	
 
 	
 

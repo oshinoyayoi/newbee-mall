@@ -1,9 +1,12 @@
 package ltd.newbee.mall.newbeemall.controller;
 
+import java.util.HashMap;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,15 +30,14 @@ public class SkuCategoryController {
 	@Resource
 	private CountSkuCategoryMapper countSkuCategoryMapper;
     
-	@RequestMapping(value = "/category/{goodsCategoryId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/category/", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@PathVariable("goodsCategoryId") Long categoryId,String colOne,String colTwo,String colThree, Integer page, String orderBy,
-			String ascOrDesc) {
+	public Result queryProduct(@RequestBody HashMap<String, Object> map) {
 
-		Integer pageNum = (page - 1) * 20;
+	//	Integer pageNum = (page - 1) * 20;
 
 		
-		return ResultGenerator.genSuccessResult(skuCategoryService.getSkuCategory(categoryId,colOne,colTwo,colThree, pageNum, orderBy, ascOrDesc));
+		return ResultGenerator.genSuccessResult(skuCategoryService.getSkuCategory(map));
 
 	}
 }
