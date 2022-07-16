@@ -8,11 +8,52 @@
  */
 package ltd.newbee.mall.newbeemall.vo;
 
-import ltd.newbee.mall.newbeemall.entity.Todo;
+import java.io.Serializable;
+import java.util.Date;
 
-public class TodoVo extends Todo {
+import javax.annotation.Generated;
 
-   
+public class TodoVo implements Serializable {
+	  
+	    private Integer taskId;
+	    
+	    private String task;
+	    
+	    private Date date;
+
+	    private Integer status;
+
+		public Integer getTaskId() {
+			return taskId;
+		}
+
+		public void setTaskId(Integer taskId) {
+			this.taskId = taskId;
+		}
+
+		public String getTask() {
+			return task;
+		}
+
+		public void setTask(String task) {
+			this.task = task;
+		}
+
+		public Date getDate() {
+			return date;
+		}
+
+		public void setDate(Date date) {
+			this.date = date;
+		}
+
+		public Integer getStatus() {
+			return status;
+		}
+
+		public void setStatus(Integer status) {
+			this.status = status;
+		}
 	
-    
+
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.newbeemall.dao.TodoMapper">
+	<!--dao层mapper，java文件名 -->
+
+	<select id="setAllTodoList"
+		resultType="ltd.newbee.mall.newbeemall.entity.Todo">
+		<!--id是mapper的方法名，resultType是指定的返回类型 -->
+		select *
+		from todo;
+	</select>
+
+	<!--todo中插入数据 -->
+	<insert id="insertTodoList">
+		INSERT INTO todo
+		(task_id,task,date,status)
+		VALUES
+		(#{taskId}, #{task}, #{date}, #{status})
+	</insert>
+
+	<!--取task_id最大值，採番用 -->
+	<select id="findMaxTaskId" resultType="Int">
+		SELECT max(task_id)
+		FROM
+		todo
+	</select>
+
+	<update id="chageStatus">
+		update todo set status =#{status}
+		where
+		task_id=#{taskId}
+	</update>
+
+
+	<delete id="deleteTodoList">
+		delete from todo where task_id=#{taskId}
+	</delete>
+
+</mapper>
+

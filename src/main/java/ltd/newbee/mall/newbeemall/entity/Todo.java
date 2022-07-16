@@ -3,6 +3,8 @@ package ltd.newbee.mall.newbeemall.entity;
 import java.util.Date;
 import javax.annotation.Generated;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Todo {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-15T19:26:29.2641359+09:00", comments="Source field: todo.task_id")
     private Integer taskId;
@@ -15,6 +17,8 @@ public class Todo {
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-15T19:26:29.2661301+09:00", comments="Source field: todo.status")
     private Integer status;
+    
+
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-15T19:26:29.2651326+09:00", comments="Source field: todo.task_id")
     public Integer getTaskId() {
@@ -55,4 +59,5 @@ public class Todo {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
 }
