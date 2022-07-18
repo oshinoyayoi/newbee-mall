@@ -14,5 +14,5 @@ public interface TodoMapper {
 	//修改status
 	int chageStatus(Map<String, Object> status);
 	//删除
-	int deleteTodoList(Map<String, Object> delete);
+	int deleteTodoList(int taskId);;
 }

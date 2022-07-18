@@ -1,5 +1,6 @@
 package ltd.newbee.mall.newbeemall.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,16 +29,17 @@ public class TodoServiceImpl implements TodoService {
 	}
 	//增加todo
 	@Override
-	public int insertTodoList(Map<String, Object> todo) {
+	public List<Todo> insertTodoList(Map<String, Object> todo) {
 		int newTaskId=todoMapper.findMaxTaskId()+1;
+		// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		todo.replace("taskId", newTaskId);
-		todo.replace("date", new Date());
-		return todoMapper.insertTodoList(todo);
+		todoMapper.insertTodoList(todo);
+		return todoMapper.setAllTodoList();
 	}
 	
 	//修改完成状态（status）
 	@Override 
-	public int chageStatus(Map<String, Object> status) {
+	public List<Todo> chageStatus(Map<String, Object> status) {
 		List<Todo> list=todoMapper.setAllTodoList();
 		int taskId=0;
 		int status1=1;
@@ -47,20 +49,14 @@ public class TodoServiceImpl implements TodoService {
 				status1=0;
 			} 
 		}
-		return todoMapper.chageStatus(status);
+		todoMapper.chageStatus(status);
+		return todoMapper.setAllTodoList();
 	}
 	
 	//删除taskId及其对应内容
-	//删除后taskId并不会重置，需要重新排列
 	@Override
-	public int deleteTodoList(Map<String, Object> delete) {
-		List<Todo> list=todoMapper.setAllTodoList();
-		List<Todo> subList=new ArrayList<>();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getTaskId()==delete.get("taskId")) {
-				delete.remove("taskId");
-			}
-		}
-		return todoMapper.deleteTodoList(delete);
+	public List<Todo> deleteTodoList(int taskId) {
+		todoMapper.deleteTodoList(taskId);
+		return todoMapper.setAllTodoList();
 	}
 }

@@ -13,7 +13,7 @@ public class Todo {
     private String task;
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-15T19:26:29.2661301+09:00", comments="Source field: todo.date")
-    private Date date;
+    private String date;
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-15T19:26:29.2661301+09:00", comments="Source field: todo.status")
     private Integer status;
@@ -41,12 +41,12 @@ public class Todo {
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-15T19:26:29.2661301+09:00", comments="Source field: todo.date")
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-07-15T19:26:29.2661301+09:00", comments="Source field: todo.date")
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
