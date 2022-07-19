@@ -31,25 +31,15 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public List<Todo> insertTodoList(Map<String, Object> todo) {
 		int newTaskId=todoMapper.findMaxTaskId()+1;
-		// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		todo.replace("taskId", newTaskId);
+		todo.put("taskId", newTaskId);
 		todoMapper.insertTodoList(todo);
 		return todoMapper.setAllTodoList();
 	}
 	
 	//修改完成状态（status）
 	@Override 
-	public List<Todo> chageStatus(Map<String, Object> status) {
-		List<Todo> list=todoMapper.setAllTodoList();
-		int taskId=0;
-		int status1=1;
-		for (int i = 0; i < list.size(); i++) {
-			taskId=list.get(i).getTaskId();
-			if (taskId==list.get(i).getTaskId()) {
-				status1=0;
-			} 
-		}
-		todoMapper.chageStatus(status);
+	public List<Todo> chageStatus(int taskId) {	
+		todoMapper.chageStatus(taskId);
 		return todoMapper.setAllTodoList();
 	}
 	

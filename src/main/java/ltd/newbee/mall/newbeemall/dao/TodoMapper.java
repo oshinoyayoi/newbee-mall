@@ -12,7 +12,7 @@ public interface TodoMapper {
     //找出最大的taskid，需要+1来新增task
 	int findMaxTaskId();
 	//修改status
-	int chageStatus(Map<String, Object> status);
+	int chageStatus(int taskId);
 	//删除
 	int deleteTodoList(int taskId);;
 }

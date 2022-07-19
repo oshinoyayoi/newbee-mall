@@ -26,7 +26,11 @@
 	</select>
 
 	<update id="chageStatus">
-		update todo set status =#{status}
+		update todo set status =
+		case status 
+		when 1 then 0
+		else 1
+		end
 		where
 		task_id=#{taskId}
 	</update>

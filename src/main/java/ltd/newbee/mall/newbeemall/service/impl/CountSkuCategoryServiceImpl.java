@@ -60,7 +60,7 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 		}
 		
 		List<SkuCategoryVo> voList = new ArrayList<>();
-		List<Long> parentIds = new ArrayList<>();
+		List<Integer> parentIds = new ArrayList<>();
 		List<GoodsCategory> subList = ecGoodsCategoryMapper.selectGoodsCategory();
 		List<SubECGoodsCategoryVo> countAndParentId = new ArrayList<>();
 

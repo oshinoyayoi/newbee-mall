@@ -8,6 +8,6 @@ import ltd.newbee.mall.newbeemall.entity.Todo;
 public interface TodoService {
 	List<Todo> getTodoList();
 	List<Todo> insertTodoList(Map<String, Object> todo);
-	List<Todo> chageStatus(Map<String, Object> status);
+	List<Todo> chageStatus(int taskId);
 	List<Todo> deleteTodoList(int taskId);
 }

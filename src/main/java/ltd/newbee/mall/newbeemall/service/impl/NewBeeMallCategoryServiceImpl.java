@@ -26,7 +26,7 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 		List<Long> parentId = new ArrayList<Long>();
 		parentId.add(0l);
 
-		List<GoodsCategory> level1 = new ArrayList<>();
+/*		List<GoodsCategory> level1 = new ArrayList<>();
 		level1 = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(parentId, 1, 20);
 		
 		List<Long> categoryList1 = new ArrayList<Long>();
@@ -46,10 +46,11 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 		// level3 parentId = level2 categoryId
 		List<GoodsCategory> level3 = new ArrayList<>();
 		level3 = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(categoryList2, 3, 100);
-
+*/
 		// level1 entity => vo
 		List<NewBeeMallIndexCategoryVO> voList1 = new ArrayList<>();
-		for (GoodsCategory gc1 : level1) {
+		
+	/*	for (GoodsCategory gc1 : level1) {
 			NewBeeMallIndexCategoryVO vo1 = new NewBeeMallIndexCategoryVO();
 			vo1.setCategoryId(gc1.getCategoryId());
 			vo1.setCategoryLevel(gc1.getCategoryLevel());
@@ -81,7 +82,7 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 			vo1.setSecondLevelCategoryVOS(voList2);
 			voList1.add(vo1);
 		}
-
+*/
 		return voList1;
 	}
 }

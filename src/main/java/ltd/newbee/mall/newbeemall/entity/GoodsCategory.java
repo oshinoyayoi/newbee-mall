@@ -14,11 +14,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class GoodsCategory {
-    private Long categoryId;
+    private Integer categoryId;
 
     private Byte categoryLevel;
 
-    private Long parentId;
+    private Integer parentId;
 
     private String categoryName;
 
@@ -36,11 +36,11 @@ public class GoodsCategory {
 
     private Integer updateUser;
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -52,11 +52,11 @@ public class GoodsCategory {
         this.categoryLevel = categoryLevel;
     }
 
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 

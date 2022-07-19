@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ltd.newbee.mall.newbeemall.dao.CategoryMapper;
 import ltd.newbee.mall.newbeemall.dao.ECGoodsDetailMapper;
 import ltd.newbee.mall.newbeemall.entity.Category;
+import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
 import ltd.newbee.mall.newbeemall.entity.Sku;
 import ltd.newbee.mall.newbeemall.service.CategoryService;
 import ltd.newbee.mall.newbeemall.service.ECGoodsDetailService;
@@ -21,14 +22,15 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Resource
 	CategoryMapper categoryMapper;
-
+	
+	
 	@Override
-	public List<CategoryVo> getCategoryForIndex() {
-		List<Category> list = categoryMapper.selectGoodsDetail();
+	public List<CategoryVo> getCategoryForIndex(int parentId) {
+		List<GoodsCategory> list = categoryMapper.selectGoodsDetail(parentId);
 		List<CategoryVo> subList=new ArrayList<>();
 		//mysql里面所有的列的遍历 
-		for (Category category : list) {
-			if (category.getParent()==0) {
+		for (GoodsCategory category : list) {
+			if (category.getParentId()==0) {
 				CategoryVo subList2= new CategoryVo();
 				BeanUtils.copyProperties(category, subList2);
 				subList2.setSubList(getSubList(list, subList2));
@@ -37,10 +39,10 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		return subList;
 	}
-	public List<CategoryVo> getSubList(List<Category> list,CategoryVo categoryVo){
+	public List<CategoryVo> getSubList(List<GoodsCategory> list,CategoryVo categoryVo){
 		List<CategoryVo> subList=new ArrayList<>();
-		for (Category category : list) {
-			if (categoryVo.getCategoryId().equals(category.getParent())) {
+		for (GoodsCategory category : list) {
+			if (categoryVo.getCategoryId().equals(category.getParentId())) {
 				CategoryVo subList2= new CategoryVo();
 				BeanUtils.copyProperties(category, subList2);
 				subList2.setSubList(getSubList(list, subList2));

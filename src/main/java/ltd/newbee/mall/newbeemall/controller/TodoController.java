@@ -49,10 +49,10 @@ public class TodoController {
 		}
 	//修改status
 	@CrossOrigin(origins = "http://localhost:3000")
-	@PutMapping(value = "/todo")
+	@PutMapping(value = "/todo/{taskId}")
 	@ResponseBody
-	public Result newList(@RequestBody HashMap<String, Object> statusMap) {
-		return ResultGenerator.genSuccessResult(todoService.chageStatus(statusMap));	
+	public Result newList(@PathVariable("taskId") int taskId) {
+		return ResultGenerator.genSuccessResult(todoService.chageStatus(taskId));	
 		
 		}
 	
@@ -65,6 +65,8 @@ public class TodoController {
 
 	}
 }
+
+//@ResponseBody 以json格式返回
 // ...业务处理
 
 // return ResultGenerator

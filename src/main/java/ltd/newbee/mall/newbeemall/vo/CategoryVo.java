@@ -11,9 +11,10 @@ package ltd.newbee.mall.newbeemall.vo;
 import java.util.List;
 
 import ltd.newbee.mall.newbeemall.entity.Category;
+import ltd.newbee.mall.newbeemall.entity.GoodsCategory;
 
 
-public class CategoryVo extends Category {
+public class CategoryVo extends GoodsCategory {
 
     private List<CategoryVo> subList;
     
