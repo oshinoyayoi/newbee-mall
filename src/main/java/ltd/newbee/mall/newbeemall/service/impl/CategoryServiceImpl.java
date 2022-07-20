@@ -25,8 +25,8 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	
 	@Override
-	public List<CategoryVo> getCategoryForIndex(int parentId) {
-		List<GoodsCategory> list = categoryMapper.selectGoodsDetail(parentId);
+	public List<CategoryVo> getCategoryForIndex() {
+		List<GoodsCategory> list = categoryMapper.selectGoodsDetail();
 		List<CategoryVo> subList=new ArrayList<>();
 		//mysql里面所有的列的遍历 
 		for (GoodsCategory category : list) {

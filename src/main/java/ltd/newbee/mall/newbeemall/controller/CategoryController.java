@@ -19,8 +19,8 @@ public class CategoryController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping(value ="/category")
 	@ResponseBody
-	public Result getgoodsDetail(int parentId) {
-		return ResultGenerator.genSuccessResult(categoryService.getCategoryForIndex(parentId));
+	public Result getgoodsDetail() {
+		return ResultGenerator.genSuccessResult(categoryService.getCategoryForIndex());
 	}
 }
 	

@@ -5,7 +5,7 @@
 		resultType="ltd.newbee.mall.newbeemall.entity.GoodsCategory">
 		select category_id,parent_id,category_name
 		from tb_newbee_mall_goods_category
-		where parent_id=#{parentId};
+		
 	</select>
 
 </mapper>

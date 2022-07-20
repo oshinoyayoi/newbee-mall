@@ -6,6 +6,6 @@ import ltd.newbee.mall.newbeemall.entity.Category;
 import ltd.newbee.mall.newbeemall.vo.CategoryVo;
 
 public interface CategoryService {
-	List<CategoryVo> getCategoryForIndex(int parentId);
+	List<CategoryVo> getCategoryForIndex();
 
 }
