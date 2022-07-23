@@ -1,10 +1,10 @@
-package ltd.newbee.mall.newbeemall.entity;
+ package ltd.newbee.mall.newbeemall.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.Generated;
 
-public class Category implements Serializable {
+public class Category123 implements Serializable {
 
 	@Generated(value = "org.mybatis.generator.api.MyBatisGenerator", date = "2022-07-01T10:29:36.2464111+09:00", comments = "Source field: category.category_id")
 	private Integer categoryId;

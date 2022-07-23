@@ -9,14 +9,10 @@ public class SkuCategoryVo extends TbNewbeeMallGoodsInfo {
 	private String col;
 	
 	private String colName;
-  
-	private String colOne;
-	
-	private String colTwo;
-	
-	private String colThree;
 	
 	private List<SkuCategoryVo> colsAndGoodsId;
+	
+	private Integer categoryId;
 	
 	public String getCol() {
 		return col;
@@ -34,29 +30,6 @@ public class SkuCategoryVo extends TbNewbeeMallGoodsInfo {
 		this.colName = colName;
 	}
 
-	public String getColOne() {
-		return colOne;
-	}
-
-	public void setColOne(String colOne) {
-		this.colOne = colOne;
-	}
-
-	public String getColTwo() {
-		return colTwo;
-	}
-
-	public void setColTwo(String colTwo) {
-		this.colTwo = colTwo;
-	}
-
-	public String getColThree() {
-		return colThree;
-	}
-
-	public void setColThree(String colThree) {
-		this.colThree = colThree;
-	}
 
 	public List<SkuCategoryVo> getColsGoodsId() {
 		return colsAndGoodsId;
@@ -64,6 +37,14 @@ public class SkuCategoryVo extends TbNewbeeMallGoodsInfo {
 
 	public void setColsGoodsId(List<SkuCategoryVo> colsGoodsId) {
 		this.colsAndGoodsId = colsGoodsId;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	

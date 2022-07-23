@@ -240,7 +240,7 @@ public class TbNewbeeMallGoodsInfo {
 
 	private String orderBy;
 
-	private Long parentId;
+	private Integer parentId;
 
 	private String colOne;
 
@@ -254,11 +254,11 @@ public class TbNewbeeMallGoodsInfo {
 		this.orderBy = orderBy;
 	}
 
-	public Long getparentId() {
+	public Integer getparentId() {
 		return this.parentId;
 	}
 
-	public void setparentId(Long parentId) {
+	public void setparentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 

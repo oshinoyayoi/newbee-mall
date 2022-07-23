@@ -6,5 +6,5 @@ import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo;
 import ltd.newbee.mall.newbeemall.vo.SubECGoodsCategoryVo;
 
 public interface SecondSkuCategoryMapper {
-	List<SubECGoodsCategoryVo> findSubCategory(Long categoryId);
+	List<SubECGoodsCategoryVo> findSubCategory(Integer categoryId);
 }

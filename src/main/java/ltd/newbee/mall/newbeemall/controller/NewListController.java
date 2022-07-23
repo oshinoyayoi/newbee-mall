@@ -6,21 +6,23 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ltd.newbee.mall.newbeemall.dao.CountSkuCategoryMapper;
-import ltd.newbee.mall.newbeemall.service.SkuCategoryService;
+import ltd.newbee.mall.newbeemall.entity.MallUser;
+import ltd.newbee.mall.newbeemall.service.NewListService;
+import ltd.newbee.mall.newbeemall.service.TodoService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
 @Controller
-public class SkuCategoryController {
+public class NewListController {
 
 	// 方法2 Postman:POST
 	/**
@@ -29,26 +31,13 @@ public class SkuCategoryController {
 	 * @param id
 	 */
 	@Resource
-	private SkuCategoryService skuCategoryService;
-	@Resource
-	private CountSkuCategoryMapper countSkuCategoryMapper;
-	
+	private NewListService newListService;
+    //所有todolist
 	@CrossOrigin(origins = "http://localhost:3000")
-	
-	@PostMapping("/categoryList")
+	@RequestMapping(value = "/newList", method = RequestMethod.GET)
 	@ResponseBody
-	public Result queryProduct(@RequestBody HashMap<String, Object> map) {
-
-	//	Integer pageNum = (page - 1) * 20;
-
-		return ResultGenerator.genSuccessResult(skuCategoryService.getSkuCategory(map));
+	public Result getgoodsDetail() {
+		return ResultGenerator.genSuccessResult(newListService.getNewList());
 
 	}
 }
-
-
-// ...业务处理
-
-// return ResultGenerator
-// .genSuccessResult(skuCategoryService.getSkuCategory(info.getGoodsCategoryId(),
-// info.getOrderBy()));

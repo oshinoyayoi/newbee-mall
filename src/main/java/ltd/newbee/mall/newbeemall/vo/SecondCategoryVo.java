@@ -17,6 +17,7 @@ public class SecondCategoryVo {
 
 	private List<SubCategoryVo> resultList;
 	
+	
 
 	public List<SubECGoodsCategoryVo> getCountAndParentId() {
 		return countAndParentId;
