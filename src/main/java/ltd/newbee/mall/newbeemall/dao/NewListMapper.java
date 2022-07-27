@@ -8,6 +8,6 @@ import ltd.newbee.mall.newbeemall.entity.Todo;
 
 public interface NewListMapper {
 	List<TbNewbeeMallGoodsInfo> setNewList();
-	
+	List<TbNewbeeMallGoodsInfo> setNewLists(Long goodsCategoryId);
 	
 }

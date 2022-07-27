@@ -8,5 +8,5 @@ import ltd.newbee.mall.newbeemall.entity.Todo;
 
 public interface NewListService {
 	List<TbNewbeeMallGoodsInfo> getNewList();
-	
+	List<TbNewbeeMallGoodsInfo> getNewLists(Long goodsCategoryId);
 }

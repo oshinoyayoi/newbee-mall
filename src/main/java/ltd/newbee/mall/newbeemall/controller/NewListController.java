@@ -40,4 +40,12 @@ public class NewListController {
 		return ResultGenerator.genSuccessResult(newListService.getNewList());
 
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/newLists/{goodsCategoryId}")
+	@ResponseBody
+	public Result getgoodsDetails(@PathVariable("goodsCategoryId") Long goodsCategoryId) {
+		return ResultGenerator.genSuccessResult(newListService.getNewLists(goodsCategoryId));
+
+	}
 }

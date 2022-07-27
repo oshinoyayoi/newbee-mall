@@ -30,5 +30,11 @@ public class NewListServiceImpl implements NewListService {
 		List<TbNewbeeMallGoodsInfo> list = newListMapper.setNewList();
 		return list;
 	}
+	
+	
+	public List<TbNewbeeMallGoodsInfo> getNewLists(Long goodsCategoryId) {
+		List<TbNewbeeMallGoodsInfo> list = newListMapper.setNewLists(goodsCategoryId);
+		return list;
+	}
 
 }
