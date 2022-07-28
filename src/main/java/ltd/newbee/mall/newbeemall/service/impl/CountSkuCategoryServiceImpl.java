@@ -55,10 +55,13 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 		String ascOrDesc = (String) map2.get("ascOrDesc");
 		map2.remove("ascOrDesc");
 		List<String> cols = new ArrayList<>();
+		cols =(List<String>) map2.get(cols);
+		
+	/*	
 		for (String string : map2.keySet()) {
-			cols.add((String) map2.get(string));
+			cols.add((String) map2.get(cols));
 		}
-
+*/
 		List<SkuCategoryVo> voList = new ArrayList<>();
 		List<Integer> parentIds = new ArrayList<>();
 		List<GoodsCategory> subList = ecGoodsCategoryMapper.selectGoodsCategory();
@@ -167,6 +170,63 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
          
    return newList;
    }
+	
+	
+	
+	
+	// 根据筛选条件筛选商品，有筛选条件时才使用该方法，无筛选条件时直接计件
+		public List<SkuCategoryVo> selectGoodsByCols(List<String> cols, List<SkuCategoryVo> goodsList,
+				List<SkuCategoryVo> detailsList) {
+			HashSet<String> colNames = new HashSet<>();
+			List<List<Long>> goodsIdsList = new ArrayList<>();
+			List<Long> selectedGoodsIds = new ArrayList<>();
+			for (String col : cols) {
+				for (SkuCategoryVo detail : detailsList) {
+					if (col.equals(detail.getCol())) { // 找出筛选条件中的colname
+						colNames.add(detail.getColName());
+						break;
+					}
+				}
+			}
+
+			for (String colName : colNames) {
+				List<Long> goodsIds = new ArrayList<>();
+				for (String col : cols) {
+					for (SkuCategoryVo detail : detailsList) {
+						// 当前colname下，col与该detail的col相等时，且goodsid不在列表中，取goodsid放入列表(取并集)
+						if (col.equals(detail.getCol()) && detail.getColName().equals(colName)
+								&& !goodsIds.contains(detail.getGoodsId())) {
+							goodsIds.add(detail.getGoodsId());
+						}
+					}
+				}
+				goodsIdsList.add(goodsIds);
+			}
+
+			if (goodsIdsList.size() == 1) {
+				for (Long goodsId : goodsIdsList.get(0)) {// 放入该colname的id
+					selectedGoodsIds.add(goodsId);
+				}
+			} else {
+				// 不同colname的id取交集，放入list
+				for (int i = 0; i < goodsIdsList.size() - 1; i++) {
+					for (Long goodsId : goodsIdsList.get(i)) {
+						if (goodsIdsList.get(i + 1).contains(goodsId)) {
+							selectedGoodsIds.add(goodsId);
+						}
+					}
+				}
+			}
+
+			for (int i = 0; i < goodsList.size(); i++) {
+				if (!selectedGoodsIds.contains(goodsList.get(i).getGoodsId())) {
+					goodsList.remove(i);
+					i--;
+				}
+			}
+
+			return goodsList;
+		}
 }
 	
 /*		HashSet<SkuCategoryVo> set = new HashSet<SkuCategoryVo>();

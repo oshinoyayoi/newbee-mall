@@ -11,7 +11,7 @@ public class SecondCategoryVo {
 
 	private Integer countCategoryNumsInteger;
 
-	private Integer countSubCategory;
+	private List<SkuCategoryVo> countSubCategory;
 
 	private List<SubCategoryVo> colNameAndCountCol;
 
@@ -43,14 +43,6 @@ public class SecondCategoryVo {
 		this.countCategoryNumsInteger = countCategoryNumsInteger;
 	}
 
-	public Integer getCountSubCategory() {
-		return countSubCategory;
-	}
-
-	public void setCountSubCategory(Integer countSubCategory) {
-		this.countSubCategory = countSubCategory;
-	}
-
 	public List<SubCategoryVo> getColNameAndCountCol() {
 		return colNameAndCountCol;
 	}
@@ -65,6 +57,14 @@ public class SecondCategoryVo {
 
 	public void setResultList(List<SubCategoryVo> resultList) {
 		this.resultList = resultList;
+	}
+
+	public List<SkuCategoryVo> getCountSubCategory() {
+		return countSubCategory;
+	}
+
+	public void setCountSubCategory(List<SkuCategoryVo> countSubCategory) {
+		this.countSubCategory = countSubCategory;
 	}
 
 	
