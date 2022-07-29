@@ -55,13 +55,8 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 		String ascOrDesc = (String) map2.get("ascOrDesc");
 		map2.remove("ascOrDesc");
 		List<String> cols = new ArrayList<>();
-		cols =(List<String>) map2.get(cols);
-		
-	/*	
-		for (String string : map2.keySet()) {
-			cols.add((String) map2.get(cols));
-		}
-*/
+		cols = (List<String>) map2.get(cols);
+
 		List<SkuCategoryVo> voList = new ArrayList<>();
 		List<Integer> parentIds = new ArrayList<>();
 		List<GoodsCategory> subList = ecGoodsCategoryMapper.selectGoodsCategory();
@@ -79,34 +74,58 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 			countAndParentId = secondSkuCategoryMapper.findSubCategory(categoryId);
 
 			voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, pageNum, orderBy, ascOrDesc);
-            
-		
+
 			int x = 0;
 
 			for (int i = 0; i < countAndParentId.size(); i++) {
 				x += countAndParentId.get(i).getSubNumsOfGoods();
 			}
 
+			/*
+			 * for (int i = 0; i < voList.size(); i++) { if
+			 * (countAndParentId.contains(voList.get(i).getCategoryId())) {
+			 * countAndParentId.add(voList.get(i).getCategoryId()); } }
+			 */
+
 			// 打包
 			secondVo.setCountAndParentId(countAndParentId);
 			secondVo.setCountCategoryNumsInteger(x);
-		//	secondVo.setVoList(voList);
+			// secondVo.setVoList(voList);
 
 		} else {
 
 			List<SkuCategoryVo> entityList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, pageNum,
 					orderBy, ascOrDesc);
 
-		//	secondVo.setVoList(entityList);
+			// secondVo.setVoList(entityList);
 			secondVo.setCountCategoryNumsInteger(entityList.size());
 
 		}
+		List<SkuCategoryVo> thirdLevelList = new ArrayList<>();
+		if (parentIds.contains(categoryId)) {
+			for (int i = 0; i < voList.size(); i++) {
+				if (categoryId == voList.get(i).getparentId()) {
+					thirdLevelList.add(voList.get(i));
+				}
+			}
+		}
+		voList.addAll(thirdLevelList);
 		secondVo.setColNameAndCountCol(getColNameAndCountCol(categoryId, pageNum, orderBy, ascOrDesc));
-        secondVo.setVoList(removeRepetition(categoryId, pageNum, orderBy, ascOrDesc));
+		secondVo.setVoList(removeRepetition(categoryId, pageNum, orderBy, ascOrDesc));
+		// secondVo.setThirdLevelList(thirdLevelList);
 		return secondVo;
 
 	}
 
+	/*
+	 * public List<SkuCategoryVo> getCountSubCategory(){ List<SkuCategoryVo>
+	 * subCategory=new ArrayList<>(); List<SkuCategoryVo> voList = new
+	 * ArrayList<>();
+	 * 
+	 * return null;
+	 * 
+	 * }
+	 */
 	public List<SubCategoryVo> getColNameAndCountCol(Integer categoryId, Integer pageNum, String orderBy,
 			String ascOrDesc) {
 		List<SkuCategoryVo> voList = new ArrayList<>();
@@ -148,94 +167,60 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 		return colNamesAndCols; // for循环完成后返回所有数据
 
 	}
-	
-	public List<SkuCategoryVo> removeRepetition(Integer categoryId, Integer pageNum, String orderBy,
-			String ascOrDesc) {
+
+	public List<SkuCategoryVo> removeRepetition(Integer categoryId, Integer pageNum, String orderBy, String ascOrDesc) {
 		List<SkuCategoryVo> voList = new ArrayList<>();
 		voList = skuCategoryMapper.findGoodsInfoByGoodsCategoryId(categoryId, pageNum, orderBy, ascOrDesc);
-	     //去掉重复
-	     // Create a new ArrayList
-         List<SkuCategoryVo> newList = new ArrayList<>();
-         
-         HashSet<Long> set = new HashSet<Long>();
-         for (int i = 0; i < voList.size(); i++) {
-     		set.add(voList.get(i).getGoodsId());
-     	}
-         for (int i = 0; i < set.size(); i++) {
-			if (!newList.contains(voList.get(i).getGoodsId())&&set.contains(voList.get(i).getGoodsId())) {
+		// 去掉重复
+		// Create a new ArrayList
+		List<SkuCategoryVo> newList = new ArrayList<>();
+
+		HashSet<Long> set = new HashSet<Long>();
+		for (int i = 0; i < voList.size(); i++) {
+			set.add(voList.get(i).getGoodsId());
+		}
+		for (int i = 0; i < set.size(); i++) {
+			if (!newList.contains(voList.get(i).getGoodsId()) && set.contains(voList.get(i).getGoodsId())) {
 				newList.add(voList.get(i));
 			}
 		}
-         
-         
-   return newList;
-   }
-	
-	
-	
-	
-	// 根据筛选条件筛选商品，有筛选条件时才使用该方法，无筛选条件时直接计件
-		public List<SkuCategoryVo> selectGoodsByCols(List<String> cols, List<SkuCategoryVo> goodsList,
-				List<SkuCategoryVo> detailsList) {
-			HashSet<String> colNames = new HashSet<>();
-			List<List<Long>> goodsIdsList = new ArrayList<>();
-			List<Long> selectedGoodsIds = new ArrayList<>();
-			for (String col : cols) {
-				for (SkuCategoryVo detail : detailsList) {
-					if (col.equals(detail.getCol())) { // 找出筛选条件中的colname
-						colNames.add(detail.getColName());
-						break;
-					}
-				}
-			}
 
-			for (String colName : colNames) {
-				List<Long> goodsIds = new ArrayList<>();
-				for (String col : cols) {
-					for (SkuCategoryVo detail : detailsList) {
-						// 当前colname下，col与该detail的col相等时，且goodsid不在列表中，取goodsid放入列表(取并集)
-						if (col.equals(detail.getCol()) && detail.getColName().equals(colName)
-								&& !goodsIds.contains(detail.getGoodsId())) {
-							goodsIds.add(detail.getGoodsId());
-						}
-					}
-				}
-				goodsIdsList.add(goodsIds);
-			}
-
-			if (goodsIdsList.size() == 1) {
-				for (Long goodsId : goodsIdsList.get(0)) {// 放入该colname的id
-					selectedGoodsIds.add(goodsId);
-				}
-			} else {
-				// 不同colname的id取交集，放入list
-				for (int i = 0; i < goodsIdsList.size() - 1; i++) {
-					for (Long goodsId : goodsIdsList.get(i)) {
-						if (goodsIdsList.get(i + 1).contains(goodsId)) {
-							selectedGoodsIds.add(goodsId);
-						}
-					}
-				}
-			}
-
-			for (int i = 0; i < goodsList.size(); i++) {
-				if (!selectedGoodsIds.contains(goodsList.get(i).getGoodsId())) {
-					goodsList.remove(i);
-					i--;
-				}
-			}
-
-			return goodsList;
-		}
-}
-	
-/*		HashSet<SkuCategoryVo> set = new HashSet<SkuCategoryVo>();
-	for (int i = 0; i < voList.size(); i++) {
-		set.add(voList.get(i));
+		return newList;
 	}
+}
 
-	voList.clear();
-	voList.addAll(set);
-*/			
-		
+/*
+ * // 根据筛选条件筛选商品，有筛选条件时才使用该方法，无筛选条件时直接计件 public List<SkuCategoryVo>
+ * selectGoodsByCols(List<String> cols, List<SkuCategoryVo> resultList,
+ * List<SkuCategoryVo> detailsList) { HashSet<String> colNames = new
+ * HashSet<>(); List<List<Long>> goodsIdsList = new ArrayList<>(); List<Long>
+ * selectedGoodsIds = new ArrayList<>(); for (String col : cols) { for
+ * (SkuCategoryVo detail : detailsList) { if (col.equals(detail.getCol())) { //
+ * 找出筛选条件中的colname colNames.add(detail.getColName()); break; } } }
+ * 
+ * for (String colName : colNames) { List<Long> goodsIds = new ArrayList<>();
+ * for (String col : cols) { for (SkuCategoryVo detail : detailsList) { //
+ * 当前colname下，col与该detail的col相等时，且goodsid不在列表中，取goodsid放入列表(取并集) if
+ * (col.equals(detail.getCol()) && detail.getColName().equals(colName) &&
+ * !goodsIds.contains(detail.getGoodsId())) { goodsIds.add(detail.getGoodsId());
+ * } } } goodsIdsList.add(goodsIds); }
+ * 
+ * if (goodsIdsList.size() == 1) { for (Long goodsId : goodsIdsList.get(0)) {//
+ * 放入该colname的id selectedGoodsIds.add(goodsId); } } else { //
+ * 不同colname的id取交集，放入list for (int i = 0; i < goodsIdsList.size() - 1; i++) {
+ * for (Long goodsId : goodsIdsList.get(i)) { if (goodsIdsList.get(i +
+ * 1).contains(goodsId)) { selectedGoodsIds.add(goodsId); } } } }
+ * 
+ * for (int i = 0; i < resultList.size(); i++) { if
+ * (!selectedGoodsIds.contains(resultList.get(i).getGoodsId())) {
+ * resultList.remove(i); i--; } }
+ * 
+ * return resultList; }
+ */
 
+/*
+ * HashSet<SkuCategoryVo> set = new HashSet<SkuCategoryVo>(); for (int i = 0; i
+ * < voList.size(); i++) { set.add(voList.get(i)); }
+ * 
+ * voList.clear(); voList.addAll(set);
+ */

@@ -5,9 +5,7 @@
 	<select id="findGoodsInfoByGoodsCategoryId"
 		resultType="ltd.newbee.mall.newbeemall.vo.SkuCategoryVo">
 		select
-		i.goods_name,i.goods_intro,i.goods_cover_img,i.goods_carousel,i.goods_detail_content,
-		i.original_price,i.selling_price,s.col_name,s.col,
-		c.category_id,i.goods_id,i.selling_price,i.goods_cover_img
+		*
 		from
 		tb_newbee_mall_goods_info as i
 		join tb_newbee_mall_goods_category

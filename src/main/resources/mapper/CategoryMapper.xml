@@ -3,7 +3,7 @@
 <mapper namespace="ltd.newbee.mall.newbeemall.dao.CategoryMapper">
 	<select id="selectGoodsDetail"
 		resultType="ltd.newbee.mall.newbeemall.entity.GoodsCategory">
-		select category_id,parent_id,category_name,category_image
+		select *
 		from tb_newbee_mall_goods_category
 		
 	</select>

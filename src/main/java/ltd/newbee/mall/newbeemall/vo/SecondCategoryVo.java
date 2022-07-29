@@ -15,7 +15,7 @@ public class SecondCategoryVo {
 
 	private List<SubCategoryVo> colNameAndCountCol;
 
-	private List<SubCategoryVo> resultList;
+	private List<SkuCategoryVo> thirdLevelList;
 	
 	
 
@@ -51,13 +51,6 @@ public class SecondCategoryVo {
 		this.colNameAndCountCol = colNameAndCountCol;
 	}
 
-	public List<SubCategoryVo> getResultList() {
-		return resultList;
-	}
-
-	public void setResultList(List<SubCategoryVo> resultList) {
-		this.resultList = resultList;
-	}
 
 	public List<SkuCategoryVo> getCountSubCategory() {
 		return countSubCategory;
@@ -65,6 +58,14 @@ public class SecondCategoryVo {
 
 	public void setCountSubCategory(List<SkuCategoryVo> countSubCategory) {
 		this.countSubCategory = countSubCategory;
+	}
+
+	public List<SkuCategoryVo> getThirdLevelList() {
+		return thirdLevelList;
+	}
+
+	public void setThirdLevelList(List<SkuCategoryVo> thirdLevelList) {
+		this.thirdLevelList = thirdLevelList;
 	}
 
 	
