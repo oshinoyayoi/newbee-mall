@@ -59,6 +59,7 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 
 		List<SkuCategoryVo> voList = new ArrayList<>();
 		List<Integer> parentIds = new ArrayList<>();
+		List<Integer> categoryIds = new ArrayList<>();
 		List<GoodsCategory> subList = ecGoodsCategoryMapper.selectGoodsCategory();
 		List<SubECGoodsCategoryVo> countAndParentId = new ArrayList<>();
 
@@ -67,6 +68,10 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 
 		for (GoodsCategory goodsCategory : subList) {
 			parentIds.add(goodsCategory.getParentId());
+		}
+		//
+		for (GoodsCategory goodsCategory : subList) {
+			categoryIds.add(goodsCategory.getCategoryId());
 		}
 
 		if (parentIds.contains(categoryId)) {
@@ -81,15 +86,11 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 				x += countAndParentId.get(i).getSubNumsOfGoods();
 			}
 
-			/*
-			 * for (int i = 0; i < voList.size(); i++) { if
-			 * (countAndParentId.contains(voList.get(i).getCategoryId())) {
-			 * countAndParentId.add(voList.get(i).getCategoryId()); } }
-			 */
 
 			// 打包
 			secondVo.setCountAndParentId(countAndParentId);
 			secondVo.setCountCategoryNumsInteger(x);
+
 			// secondVo.setVoList(voList);
 
 		} else {
@@ -101,6 +102,18 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 			secondVo.setCountCategoryNumsInteger(entityList.size());
 
 		}
+		//
+		int count=0;
+		if (categoryIds.contains(categoryId)) {
+			for (int i = 0; i < subList.size(); i++) {
+				if (subList.get(i).getParentId().equals(categoryId)) {
+					countAndParentId.get(i).setCategoryId(subList.get(i).getCategoryId());
+					count++;
+				}
+				
+			}
+		}
+
 		List<SkuCategoryVo> thirdLevelList = new ArrayList<>();
 		if (parentIds.contains(categoryId)) {
 			for (int i = 0; i < voList.size(); i++) {

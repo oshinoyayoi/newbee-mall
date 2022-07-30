@@ -5,7 +5,7 @@
 	<select id="findSubCategory"
 		resultType="ltd.newbee.mall.newbeemall.vo.SubECGoodsCategoryVo">
 		select
-		c2.category_name,
+		c2.category_name,c2.category_id,
 		count(i.goods_id)as sub_nums_of_goods
 		from tb_newbee_mall_goods_category as c
 		join tb_newbee_mall_goods_category as c2

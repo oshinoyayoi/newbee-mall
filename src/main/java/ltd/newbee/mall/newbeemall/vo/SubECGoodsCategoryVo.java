@@ -6,6 +6,7 @@ public class SubECGoodsCategoryVo {
 
 	private Integer subNumsOfGoods;
     
+	private Integer categoryId;
 	
 	public String getCategoryName() {
 		return categoryName;
@@ -21,6 +22,14 @@ public class SubECGoodsCategoryVo {
 
 	public void setSubNumsOfGoods(Integer subNumsOfGoods) {
 		this.subNumsOfGoods = subNumsOfGoods;
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 
