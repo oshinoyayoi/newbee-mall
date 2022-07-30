@@ -15,8 +15,8 @@ public class SecondCategoryVo {
 
 	private List<SubCategoryVo> colNameAndCountCol;
 
-	private List<SkuCategoryVo> thirdLevelList;
 	
+	private Integer countGoods;
 	
 
 	public List<SubECGoodsCategoryVo> getCountAndParentId() {
@@ -60,16 +60,14 @@ public class SecondCategoryVo {
 		this.countSubCategory = countSubCategory;
 	}
 
-	public List<SkuCategoryVo> getThirdLevelList() {
-		return thirdLevelList;
+	public Integer getCountGoods() {
+		return countGoods;
 	}
 
-	public void setThirdLevelList(List<SkuCategoryVo> thirdLevelList) {
-		this.thirdLevelList = thirdLevelList;
+	public void setCountGoods(Integer countGoods) {
+		this.countGoods = countGoods;
 	}
 
-	
 
-	
 
 }

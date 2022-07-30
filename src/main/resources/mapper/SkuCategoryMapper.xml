@@ -35,7 +35,7 @@
 		<if test="ascOrDesc == 'asc'">
 			ORDER BY ${orderBy} ASC
 		</if>
-		limit #{pageNum},20;
+		limit #{pageNum},5;
 
 	</select>
 

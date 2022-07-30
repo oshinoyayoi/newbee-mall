@@ -86,7 +86,6 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 				x += countAndParentId.get(i).getSubNumsOfGoods();
 			}
 
-
 			// 打包
 			secondVo.setCountAndParentId(countAndParentId);
 			secondVo.setCountCategoryNumsInteger(x);
@@ -103,28 +102,18 @@ public class CountSkuCategoryServiceImpl implements SkuCategoryService {
 
 		}
 		//
-		int count=0;
-		if (categoryIds.contains(categoryId)) {
-			for (int i = 0; i < subList.size(); i++) {
-				if (subList.get(i).getParentId().equals(categoryId)) {
-					countAndParentId.get(i).setCategoryId(subList.get(i).getCategoryId());
-					count++;
-				}
-				
-			}
-		}
+	int count = 0;
 
-		List<SkuCategoryVo> thirdLevelList = new ArrayList<>();
-		if (parentIds.contains(categoryId)) {
-			for (int i = 0; i < voList.size(); i++) {
-				if (categoryId == voList.get(i).getparentId()) {
-					thirdLevelList.add(voList.get(i));
+		for (int i = 0; i < voList.size(); i++) {
+					 count++;
 				}
-			}
-		}
-		voList.addAll(thirdLevelList);
+			
+		
+
+		
 		secondVo.setColNameAndCountCol(getColNameAndCountCol(categoryId, pageNum, orderBy, ascOrDesc));
 		secondVo.setVoList(removeRepetition(categoryId, pageNum, orderBy, ascOrDesc));
+		secondVo.setCountGoods(count);
 		// secondVo.setThirdLevelList(thirdLevelList);
 		return secondVo;
 

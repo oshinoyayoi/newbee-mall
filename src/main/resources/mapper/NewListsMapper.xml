@@ -13,6 +13,7 @@
 		join tb_newbee_mall_goods_category as c
         on i.goods_category_id=c.category_id
         where i.goods_category_id=#{goodsCategoryId}
+        
 	</select>
 
 </mapper>
