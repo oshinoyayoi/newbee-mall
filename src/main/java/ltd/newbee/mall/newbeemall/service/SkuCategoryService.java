@@ -8,7 +8,6 @@ import ltd.newbee.mall.newbeemall.vo.SecondCategoryVo;
 import ltd.newbee.mall.newbeemall.vo.SkuCategoryVo;
 
 public interface SkuCategoryService {
-	SecondCategoryVo getSkuCategory(HashMap<String, Object>map2)
-			;
+	SecondCategoryVo getSkuCategory(HashMap<String, Object>map2);
 	
 }

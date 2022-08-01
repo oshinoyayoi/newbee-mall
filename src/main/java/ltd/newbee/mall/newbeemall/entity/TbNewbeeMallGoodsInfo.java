@@ -242,9 +242,7 @@ public class TbNewbeeMallGoodsInfo {
 
 	private Integer parentId;
 
-	private String colOne;
-
-	private String colTwo;
+	private String colImg;
 
 	public String getOrderBy() {
 		return this.orderBy;
@@ -262,19 +260,13 @@ public class TbNewbeeMallGoodsInfo {
 		this.parentId = parentId;
 	}
 
-	public String getColOne() {
-		return colOne;
+	public String getColImg() {
+		return colImg;
 	}
 
-	public void setColOne(String colOne) {
-		this.colOne = colOne;
+	public void setColImg(String colImg) {
+		this.colImg = colImg;
 	}
 
-	public String getColTwo() {
-		return colTwo;
-	}
-
-	public void setColTwo(String colTwo) {
-		this.colTwo = colTwo;
-	}
+	
 }
