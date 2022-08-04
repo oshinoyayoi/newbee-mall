@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import ltd.newbee.mall.newbeemall.entity.Sku;
+import ltd.newbee.mall.newbeemall.entity.SkuColor;
 
 public class SkuVo {
 
-	private List<String> colorList;
+	private List<SkuColor> colorList;
 	
 	private List<String> sizeList;
 	
@@ -29,11 +30,11 @@ public class SkuVo {
 		this.sizeList = sizeList;
 	}
 
-	public List<String> getColorList() {
+	public List<SkuColor> getColorList() {
 		return colorList;
 	}
 
-	public void setColorList(List<String> colorList) {
+	public void setColorList(List<SkuColor> colorList) {
 		this.colorList = colorList;
 	}
 

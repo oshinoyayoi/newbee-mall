@@ -26,7 +26,7 @@ import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
 @Controller
-public class SkuController {
+public class QuestionsAndAnswersController {
 
 	// 方法2 Postman:POST
 	/**
@@ -35,16 +35,21 @@ public class SkuController {
 	 * @param id
 	 */
 	@Resource
-	private SkuService skuService;
+	private QuestionsAndAnswersService questionsAndAnswersService;
 
-	// 获取所有商品
+	//获取所有商品
 	@CrossOrigin(origins = "http://localhost:3000")
 
-	@GetMapping("/sku")
+	@GetMapping("/qAndA")
 	@ResponseBody
-	public Result getgoodsDetail(Long goodsId, @RequestParam(name = "size", defaultValue = "シングル") String size,
-			@RequestParam(name = "color", defaultValue = "ホワイト") String color) {
-		return ResultGenerator.genSuccessResult(skuService.getSkuProduct(goodsId, size, color));
+	public Result getgoodsDetail(Long goodsId,Long pageNum) {
+		return ResultGenerator.genSuccessResult(questionsAndAnswersService.getList(goodsId,pageNum));
 
 	}
+
+/*	public Result getgoodsDetail(Long goodsId,String size,String color) {
+		return ResultGenerator.genSuccessResult(skuService.getSkuProduct(goodsId,size,color));
+
+	}
+*/
 }

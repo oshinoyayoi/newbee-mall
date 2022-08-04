@@ -7,8 +7,23 @@
 		resultType="ltd.newbee.mall.newbeemall.entity.Sku">
 		<!--id是mapper的方法名，resultType是指定的返回类型 -->
 		select * from sku
-       
+        where goods_id=#{goodsId} 
+        and size=#{size} 
+        and color=#{color}
+        and stock!=0;
+	</select>
+    <select id="getSizeList"
+		resultType="java.lang.String">
+		SELECT size FROM sku
+		WHERE goods_id=#{goodsId} and stock!=0
+		group by size;
 	</select>
 
+	<select id="getColorList"
+		resultType="java.lang.String">
+		SELECT color,color_img FROM sku
+		WHERE goods_id=#{goodsId} and size=#{size} and stock!=0;
+	</select>
+	
 </mapper>
 
