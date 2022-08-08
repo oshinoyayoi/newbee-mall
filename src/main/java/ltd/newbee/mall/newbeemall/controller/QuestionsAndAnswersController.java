@@ -42,8 +42,8 @@ public class QuestionsAndAnswersController {
 
 	@GetMapping("/qAndA")
 	@ResponseBody
-	public Result getgoodsDetail(Long goodsId,Long pageNum) {
-		return ResultGenerator.genSuccessResult(questionsAndAnswersService.getList(goodsId,pageNum));
+	public Result getgoodsDetail(Long goodsId,String orderBy,String ascOrDesc,Long pageNum) {
+		return ResultGenerator.genSuccessResult(questionsAndAnswersService.getList(goodsId,orderBy,ascOrDesc, pageNum));
 
 	}
 

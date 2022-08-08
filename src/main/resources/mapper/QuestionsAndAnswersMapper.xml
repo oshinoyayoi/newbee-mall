@@ -9,6 +9,12 @@
 		select question,question_date,answer,answer_date,id
         from questions_and_answers
         where goods_id=#{goodsId}
+        <if test="ascOrDesc == 'desc'">
+			ORDER BY ${orderBy} DESC
+		</if>
+		<if test="ascOrDesc == 'asc'">
+			ORDER BY ${orderBy} ASC
+		</if>
         limit #{pageNum},3;
 	</select>
 	

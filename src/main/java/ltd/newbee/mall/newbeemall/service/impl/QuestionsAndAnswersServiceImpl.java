@@ -29,8 +29,8 @@ public class QuestionsAndAnswersServiceImpl implements QuestionsAndAnswersServic
     
 	
 	@Override
-	public QuestionsAndAnswersVo getList(Long goodsId,Long pageNum) {
-		List<QuestionsAndAnswers> list=questionsAndAnswersMapper.getQuestionsAndAnswers(goodsId, pageNum);
+	public QuestionsAndAnswersVo getList(Long goodsId,String orderBy,String ascOrDesc,Long pageNum) {
+		List<QuestionsAndAnswers> list=questionsAndAnswersMapper.getQuestionsAndAnswers(goodsId,orderBy,ascOrDesc,pageNum);
 		QuestionsAndAnswersVo questionsAndAnswersVo=new QuestionsAndAnswersVo();
 		int count=0;
 		for (int i = 0; i < list.size(); i++) {
