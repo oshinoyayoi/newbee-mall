@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+
+	namespace="ltd.newbee.mall.newbeemall.dao.CountQuestionAndAnswersMapper">
+	<!--dao层mapper，java文件名 -->
+	
+	<select id="countNumberQAndA"
+		resultType="java.lang.Integer">
+		<!--id是mapper的方法名，resultType是指定的返回类型-->
+		select COUNT(*) from questions_and_answers
+        where goods_id=#{goodsId};
+
+
+	</select>
+
+</mapper>
+

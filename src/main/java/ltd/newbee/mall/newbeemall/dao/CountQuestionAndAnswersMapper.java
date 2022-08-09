@@ -4,7 +4,7 @@ import java.util.List;
 
 import ltd.newbee.mall.newbeemall.entity.TbNewbeeMallGoodsInfo;
 
-public interface CountSkuCategoryMapper {
+public interface CountQuestionAndAnswersMapper {
+	Integer countNumberQAndA(Long goodsId);
 	
-	Integer countnumberOfCategoryId(Long categoryId);
 }

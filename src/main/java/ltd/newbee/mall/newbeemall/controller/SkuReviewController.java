@@ -20,13 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ltd.newbee.mall.newbeemall.entity.MallUser;
 import ltd.newbee.mall.newbeemall.service.NewListService;
 import ltd.newbee.mall.newbeemall.service.QuestionsAndAnswersService;
+import ltd.newbee.mall.newbeemall.service.SkuReviewService;
 import ltd.newbee.mall.newbeemall.service.SkuService;
 import ltd.newbee.mall.newbeemall.service.TodoService;
 import ltd.newbee.mall.newbeemall.util.Result;
 import ltd.newbee.mall.newbeemall.util.ResultGenerator;
 
 @Controller
-public class QuestionsAndAnswersController {
+public class SkuReviewController {
 
 	// 方法2 Postman:POST
 	/**
@@ -35,15 +36,15 @@ public class QuestionsAndAnswersController {
 	 * @param id
 	 */
 	@Resource
-	private QuestionsAndAnswersService questionsAndAnswersService;
+	private SkuReviewService skuReviewService;
 
 	//获取所有商品
 	@CrossOrigin(origins = "http://localhost:3000")
 
-	@GetMapping("/qAndA")
+	@GetMapping("/skuReview")
 	@ResponseBody
-	public Result getgoodsDetail(Long goodsId,String orderBy,Long pageNum) {
-		return ResultGenerator.genSuccessResult(questionsAndAnswersService.getList(goodsId, orderBy, pageNum));
+	public Result getReviewResult(Long goodsId) {
+		return ResultGenerator.genSuccessResult(skuReviewService.getAll(goodsId));
 
 	}
 

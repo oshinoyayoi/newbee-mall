@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import ltd.newbee.mall.newbeemall.dao.CountQuestionAndAnswersMapper;
 import ltd.newbee.mall.newbeemall.dao.QuestionsAndAnswersMapper;
 import ltd.newbee.mall.newbeemall.dao.TodoMapper;
 import ltd.newbee.mall.newbeemall.entity.QuestionsAndAnswers;
@@ -26,16 +27,16 @@ public class QuestionsAndAnswersServiceImpl implements QuestionsAndAnswersServic
 
 	@Resource
 	QuestionsAndAnswersMapper questionsAndAnswersMapper;
-    
+	@Resource
+	CountQuestionAndAnswersMapper countQuestionAndAnswersMapper;
 	
 	@Override
-	public QuestionsAndAnswersVo getList(Long goodsId,String orderBy,String ascOrDesc,Long pageNum) {
-		List<QuestionsAndAnswers> list=questionsAndAnswersMapper.getQuestionsAndAnswers(goodsId,orderBy,ascOrDesc,pageNum);
+	public QuestionsAndAnswersVo getList(Long goodsId,String orderBy,Long pageNum) {
+		int start=(int) ((pageNum-1)*3);
+		List<QuestionsAndAnswers> list=questionsAndAnswersMapper.getQuestionsAndAnswers(goodsId, orderBy, start);
 		QuestionsAndAnswersVo questionsAndAnswersVo=new QuestionsAndAnswersVo();
-		int count=0;
-		for (int i = 0; i < list.size(); i++) {
-				count++;		
-		}
+		int count=countQuestionAndAnswersMapper.countNumberQAndA(goodsId);
+		
 		
 		
 		questionsAndAnswersVo.setCount(count);
