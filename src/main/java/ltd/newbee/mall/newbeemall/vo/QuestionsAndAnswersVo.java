@@ -9,6 +9,7 @@ import ltd.newbee.mall.newbeemall.entity.SkuColor;
 
 public class QuestionsAndAnswersVo {
 
+	
 	private List<QuestionsAndAnswers> list;
 	
 	private Integer count;

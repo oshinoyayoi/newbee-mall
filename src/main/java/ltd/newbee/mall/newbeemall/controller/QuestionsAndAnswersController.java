@@ -37,19 +37,32 @@ public class QuestionsAndAnswersController {
 	@Resource
 	private QuestionsAndAnswersService questionsAndAnswersService;
 
-	//获取所有商品
+	// 获取所有商品
 	@CrossOrigin(origins = "http://localhost:3000")
 
 	@GetMapping("/qAndA")
 	@ResponseBody
-	public Result getgoodsDetail(Long goodsId,String orderBy,Long pageNum) {
+	public Result getgoodsDetail(Long goodsId, String orderBy, Long pageNum) {
 		return ResultGenerator.genSuccessResult(questionsAndAnswersService.getList(goodsId, orderBy, pageNum));
 
 	}
 
-/*	public Result getgoodsDetail(Long goodsId,String size,String color) {
-		return ResultGenerator.genSuccessResult(skuService.getSkuProduct(goodsId,size,color));
+	// 增加
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/qAndA/insert")
+	@ResponseBody
+	public Result insetQuestion(@RequestBody HashMap<String, Object> qaMap) {
+		// String goodsId1 = qaMap.get("goodsId").toString();
+		// long goodsId = Long.parseLong(goodsId1);
+		return ResultGenerator.genSuccessResult(questionsAndAnswersService.insertQAList(qaMap));
 
 	}
-*/
+
+	/*
+	 * public Result getgoodsDetail(Long goodsId,String size,String color) { return
+	 * ResultGenerator.genSuccessResult(skuService.getSkuProduct(goodsId,size,color)
+	 * );
+	 * 
+	 * }
+	 */
 }

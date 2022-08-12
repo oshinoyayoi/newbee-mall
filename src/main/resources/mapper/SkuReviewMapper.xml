@@ -6,9 +6,10 @@
 	<select id="getReviews"
 		resultType="ltd.newbee.mall.newbeemall.entity.SkuReview">
 		<!--id是mapper的方法名，resultType是指定的返回类型 -->
-		select *
-        from sku_review
-        where goods_id=#{goodsId} 
+		SELECT *
+        FROM sku_review
+        WHERE goods_id=#{goodsId} 
+        ORDER BY great desc;
 	</select>
 	
 	 

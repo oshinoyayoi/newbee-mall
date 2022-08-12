@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import ltd.newbee.mall.newbeemall.dao.CountQuestionAndAnswersMapper;
+import ltd.newbee.mall.newbeemall.dao.GoodsQuestionAndAnswerMapper;
 import ltd.newbee.mall.newbeemall.dao.QuestionsAndAnswersMapper;
 import ltd.newbee.mall.newbeemall.dao.TodoMapper;
 import ltd.newbee.mall.newbeemall.entity.QuestionsAndAnswers;
@@ -29,29 +30,33 @@ public class QuestionsAndAnswersServiceImpl implements QuestionsAndAnswersServic
 	QuestionsAndAnswersMapper questionsAndAnswersMapper;
 	@Resource
 	CountQuestionAndAnswersMapper countQuestionAndAnswersMapper;
-	
+
 	@Override
-	public QuestionsAndAnswersVo getList(Long goodsId,String orderBy,Long pageNum) {
-		int start=(int) ((pageNum-1)*3);
-		List<QuestionsAndAnswers> list=questionsAndAnswersMapper.getQuestionsAndAnswers(goodsId, orderBy, start);
-		QuestionsAndAnswersVo questionsAndAnswersVo=new QuestionsAndAnswersVo();
-		int count=countQuestionAndAnswersMapper.countNumberQAndA(goodsId);
-		
-		
-		
+	public QuestionsAndAnswersVo getList(Long goodsId, String orderBy, Long pageNum) {
+		int start = (int) ((pageNum - 1) * 3);
+		List<QuestionsAndAnswers> list = questionsAndAnswersMapper.getQuestionsAndAnswers(goodsId, orderBy, start);
+		QuestionsAndAnswersVo questionsAndAnswersVo = new QuestionsAndAnswersVo();
+		int count = countQuestionAndAnswersMapper.countNumberQAndA(goodsId);
 		questionsAndAnswersVo.setCount(count);
 		questionsAndAnswersVo.setList(list);
 		return questionsAndAnswersVo;
 	}
 
-
-	@Override
+    @Override
 	public List<QuestionsAndAnswers> getAll(Long goodsId) {
-		List<QuestionsAndAnswers> allList=questionsAndAnswersMapper.getAllQuestions(goodsId);
-		int count=0;
+		List<QuestionsAndAnswers> allList = questionsAndAnswersMapper.getAllQuestions(goodsId);
+		int count = 0;
 		for (int i = 0; i < allList.size(); i++) {
 			count++;
 		}
 		return allList;
+	}
+
+	// 添加question
+	@Override
+	public int insertQAList(Map<String, Object> qa) {
+		// System.out.print(qa.get("goodsId"));
+		
+		return questionsAndAnswersMapper.insertQAList(qa);
 	}
 }
