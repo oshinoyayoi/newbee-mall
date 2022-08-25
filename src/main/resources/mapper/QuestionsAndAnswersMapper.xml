@@ -7,11 +7,18 @@
 	<select id="getQuestionsAndAnswers"
 		resultType="ltd.newbee.mall.newbeemall.entity.QuestionsAndAnswers">
 		<!--id是mapper的方法名，resultType是指定的返回类型 -->
-		select *
-		from questions_and_answers
-		where goods_id=#{goodsId}
-		ORDER BY ${orderBy}
-		limit #{start},3;
+        SELECT *
+		FROM questions_and_answers AS q
+			LEFT JOIN (
+		        SELECT COUNT(*) AS count,like_id
+				FROM sku_review_like
+				GROUP BY like_id) 
+		        AS l
+			ON q.id = l.like_id
+		WHERE q.goods_id=#{goodsId}
+        order by ${orderBy} 
+        limit #{start},3;
+
 	</select>
 
 	<select id="getAllQuestions" resultType="java.lang.Integer">
@@ -25,12 +32,13 @@
 	<!--qa中插入数据 -->
 	<insert id="insertQAList">
 		INSERT INTO questions_and_answers
-		(goods_id,question,question_date)
+		(goods_id,question,question_date,great)
 		VALUES
 		(#{goodsId}, #{question},
-		#{questionDate})
+		#{questionDate}, #{great})
 	</insert>
 
+  
 
 </mapper>
 

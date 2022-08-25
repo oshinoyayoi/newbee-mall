@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,5 +42,7 @@ public class SkuServiceImpl implements SkuService {
 		skuVo.setVoList(voList);
 		return skuVo;
 	}
+
+	
 
 }

@@ -13,5 +13,5 @@ public interface SkuMapper {
     List<Sku> getAllDetails(Long goodsId,String size,String color);
 	List<String> getSizeList(Long goodsId);
 	List<SkuColor> getColorList(Long goodsId,String size);
-	
+
 }

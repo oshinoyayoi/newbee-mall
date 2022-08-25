@@ -12,6 +12,7 @@ import ltd.newbee.mall.newbeemall.entity.Todo;
 
 public interface SkuReviewMapper {
     List<SkuReview> getReviews(Long goodsId);
-	
+  //insert review 7
+  	int insertReview(Map<String, Object> reMap);
 	
 }

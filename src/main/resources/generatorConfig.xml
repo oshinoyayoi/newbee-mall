@@ -13,7 +13,7 @@
       	<property name="trimStrings" value="true" />
     	</javaModelGenerator>
     	
-		<table schema="newbee_mall_db" tableName="questions_and_answers">
+		<table schema="newbee_mall_db" tableName="tb_newbee_mall_shopping_cart_item">
 			<property name="useActualColumnNames" value="false" />
 		</table>
 	</context>

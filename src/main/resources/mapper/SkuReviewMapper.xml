@@ -12,7 +12,14 @@
         ORDER BY great desc;
 	</select>
 	
-	 
+	 <!--review中插入数据 -->
+	<insert id="insertReview">
+		INSERT INTO sku_review
+		(goods_id,goods_name,review_title,review,customer_name,date,stars,great)
+		VALUES
+		(#{goodsId}, #{goodsName},
+		#{reviewTitle}, #{review},#{customerName},#{date},#{stars},0)
+	</insert>
 	
 </mapper>
 

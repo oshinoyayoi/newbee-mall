@@ -15,4 +15,5 @@ public interface SkuService {
 //	List<Sku> getProductDetail();
 	//List<Sku> getProductDetailBySize(String size);
 	SkuVo getSkuProduct(Long goodsId,String size,String color);
+	
 }

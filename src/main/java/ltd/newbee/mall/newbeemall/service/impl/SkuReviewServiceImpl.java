@@ -41,4 +41,11 @@ public class SkuReviewServiceImpl implements SkuReviewService {
 	}
 
 
+	@Override
+	public int insertReview(Map<String, Object> reMap) {
+		// TODO Auto-generated method stub
+		return skuReviewMapper.insertReview(reMap);
+	}
+
+
 }

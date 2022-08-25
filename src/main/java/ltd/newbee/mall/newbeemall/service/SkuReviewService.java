@@ -10,4 +10,6 @@ import ltd.newbee.mall.newbeemall.entity.Todo;
 
 public interface SkuReviewService {
 	List<SkuReview> getAll(Long goodsId);
+	//insert review 7
+		int insertReview(Map<String, Object> reMap);
 }

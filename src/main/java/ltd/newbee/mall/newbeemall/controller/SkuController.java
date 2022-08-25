@@ -47,4 +47,6 @@ public class SkuController {
 		return ResultGenerator.genSuccessResult(skuService.getSkuProduct(goodsId, size, color));
 
 	}
+	
+	
 }

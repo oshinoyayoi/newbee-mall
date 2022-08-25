@@ -48,9 +48,13 @@ public class SkuReviewController {
 
 	}
 
-/*	public Result getgoodsDetail(Long goodsId,String size,String color) {
-		return ResultGenerator.genSuccessResult(skuService.getSkuProduct(goodsId,size,color));
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/skuReview/insert")
+	@ResponseBody
+	public Result insetReview(@RequestBody HashMap<String, Object> reMap) {
+		// String goodsId1 = qaMap.get("goodsId").toString();
+		// long goodsId = Long.parseLong(goodsId1);
+		return ResultGenerator.genSuccessResult(skuReviewService.insertReview(reMap));
 
 	}
-*/
 }
